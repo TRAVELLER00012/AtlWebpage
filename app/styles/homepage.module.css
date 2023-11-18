@@ -1,0 +1,22 @@
+.headings h3{
+    opacity: 0.3;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+.headings h1{
+    font-size: 3rem;
+    margin-top: 0;
+}
+.currentPeople{
+    margin-top: 100px;
+}
+.users{
+    display: flex;
+    overflow-x: scroll;
+}
+.shortCutMenus{
+    margin-top: 100px;
+}
+.itemList{
+    display: flex;
+}

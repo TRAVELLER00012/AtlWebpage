@@ -1,0 +1,23 @@
+.card{
+    display: flex;
+    align-items: center;
+    background-color: #413d73;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: fit-content;
+    margin-right: 15px;
+}
+.card .userDetails{
+    margin-left: 15px;
+}
+.card .userDetails h1{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.card .userDetails h5{
+    margin-top: 0;
+    font-weight: 400;
+    text-align: right;
+    opacity: 0.5;
+}
