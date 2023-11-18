@@ -1,35 +1,35 @@
-import styles2 from "../styles/issueitems.module.css"
-import styles from "../styles/item-list.module.css"
-import Warning from "@/public/images/warning.png"
+import styles from "../styles/issueitems.module.css"
 import IssueItemCard from "../components/IssueItemCard";
 
 function IssueItems(){
-    // return (
-    //     <div className={styles2.alert}>
-    //         <Image src={Warning} alt="Warning sign"/>
-    //         <p>You have no items issued!</p>
-    //     </div>
-    // )
+
     return (
         <div className={styles.main}>
             <div className={styles.itemSelection}>
-
-                <div className={styles.count}>
+                <div>
                     Sr. No
                 </div>
                 
-                <div className="name">
+                <div>
                     Name
                 </div>
                 
-                <div className="quantity">
+                <div>
                     Quantity
                 </div>
-                
+                <div>
+                   Date Issued 
+                </div>
+                <div>
+                    Return Date
+                </div>
+                <div>
+                    Return
+                </div>
 
             </div>
             <div className={styles.items}>
-                <IssueItemCard  count={1} name="D" quantity={1}/>
+                <IssueItemCard  count={1} name="D" quantity={1} issueDate="tommorroq331231231231231231827389172938712937819723912739812312312312w" returnDate="tomorrow"/>
             </div>
         </div>
     )

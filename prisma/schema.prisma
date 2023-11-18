@@ -11,6 +11,7 @@ model User {
   id                     Int    @id @default(autoincrement())
   firstName              String
   lastName               String
+  password               String
   age                    Int
   number_of_years_in_atl Int
   phonenumber            Int
