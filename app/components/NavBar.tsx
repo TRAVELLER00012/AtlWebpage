@@ -14,7 +14,6 @@ const NavBar = () => {
         <li>Home</li>
         <li>Item List</li>
         <li>Issue Items</li>
-        <li>Return Item</li>
         <li>Paths</li>
         <li>Profile</li>
       </ul>
