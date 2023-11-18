@@ -19,4 +19,54 @@ model User {
   class                  String
   section                String
   user_type              String
+
+  attendance   Attendence[]
+  project      Projects[]
+  issued_items IssuedItems[]
+}
+
+model Attendence {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  firstName String
+  lastName  String
+  state     String   @default("Present")
+  date      DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Items {
+  id       Int     @id @default(autoincrement())
+  name     String
+  quantity Int
+  issuable Boolean
+}
+
+model Projects {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  projectName String
+  date        DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model IssuedItems {
+  id           Int      @id @default(autoincrement())
+  itemId       Int
+  userId       Int
+  itemName     String
+  quantity     Int
+  dateOfIssue  DateTime
+  dateOfReturn DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model SpecialEvents {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  date        DateTime
+  location    String
 }
