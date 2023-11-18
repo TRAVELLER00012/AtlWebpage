@@ -3,11 +3,13 @@ import styles from "./styles/homepage.module.css"
 import {Chart as ChartJS,CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend,} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import Card from "./components/Card";
+import Link from "next/link";
 
 import UserLogo from "@/public/images/profile.png"
 import ItemList from "@/public/images/task-list.png"
 import IssueItem from "@/public/images/issue-item.png"
 import ReturnItem from "@/public/images/return.png"
+
 
 ChartJS.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
 const options = {
@@ -92,9 +94,9 @@ function Home(){
         <h1>Check out some of the Features!</h1>
         <div className={styles.shortcuts}>
           <div className={styles.itemList}>
-              <Card img={ItemList} innerDes={"Check out the items we have!"}>Item List</Card>
-              <Card img={IssueItem} innerDes={"Issue an Item from atl lab!"}>Issue An Item</Card>
-              <Card img={ReturnItem} innerDes={"You have nothing to return yet!"}>Return An Item</Card>
+              <Card img={ItemList} innerDes={"Check out the items we have!"}><Link href={"./itemlist"}>Item List</Link></Card>
+              <Card img={IssueItem} innerDes={"Issue an Item from atl lab!"}><Link href={"./issueitems"}>Issue An Item</Link></Card>
+              <Card img={ReturnItem} innerDes={"You have nothing to return yet!"}><Link href={"./issueitems"}>Return An Item</Link></Card>
           </div>
         </div>
       </div>

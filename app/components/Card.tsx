@@ -1,8 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 import styles from '../styles/card-styles.module.css'
+import { ReactNode } from "react";
 
 interface Props{
-    children:string,
+    children:ReactNode,
     innerDes:string,
     img:StaticImageData
 }

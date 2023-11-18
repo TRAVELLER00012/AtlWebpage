@@ -29,6 +29,10 @@
     opacity: 0.5;
     transition: opacity 0.3s;
 }
+.navbar ul li :any-link{
+    color: white;
+    text-decoration: none;
+}
 .navbar ul li:hover{
     opacity: 1;
 }

@@ -2,6 +2,7 @@ import Image from "next/image"
 
 import styles from "../styles/nav-bar.module.css"
 import NavLogo from "@/public/images/arduino.png"
+import Link from "next/link"
 
 const NavBar = () => {
   return (
@@ -11,9 +12,9 @@ const NavBar = () => {
         <h1>ATL</h1>
       </div>
       <ul className="items">
-        <li>Home</li>
-        <li>Item List</li>
-        <li>Issue Items</li>
+        <li><Link href={"."}>Home</Link></li>
+        <li><Link href={"./itemlist"}>Item List</Link></li>
+        <li><Link href={"./issueitems"}>Issue Items</Link></li>
         <li>Paths</li>
         <li>Profile</li>
       </ul>

@@ -21,3 +21,7 @@
     text-align: right;
     opacity: 0.5;
 }
+.userDetails :any-link{
+    color: white;
+    text-decoration: none;
+}
