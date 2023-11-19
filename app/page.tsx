@@ -1,7 +1,4 @@
-'use client'
 import styles from "./styles/homepage.module.css"
-import {Chart as ChartJS,CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend,} from 'chart.js';
-import { Line } from 'react-chartjs-2';
 import Card from "./components/Card";
 import Link from "next/link";
 
@@ -9,50 +6,7 @@ import UserLogo from "@/public/images/profile.png"
 import ItemList from "@/public/images/task-list.png"
 import IssueItem from "@/public/images/issue-item.png"
 import ReturnItem from "@/public/images/return.png"
-
-
-ChartJS.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-      labels: {
-        color: 'rgb(255, 255, 255)',
-      },
-    },
-  },
-  scales:{
-    y:{
-      ticks:{
-        color:'rgb(255,255,255)'
-      }
-    },
-    x:{
-      ticks:{
-        color:'rgb(255,255,255)'
-      }
-    }
-  }
-};
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Present',
-      data: [15,13,4,18,17,18,18,8],
-      borderColor: 'rgb(0, 255, 0)',
-      backgroundColor: 'rgba(0, 255, 0, 0.5)',
-    },
-    {
-      label: 'Absent',
-      data: [3,3,3,5,3,2,1],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    }
-  ],
-};
+import AttendenceGraph from "./components/AttendenceGarph";
 class Person{
   constructor(public firstName:string, public rank:string){}
 }
@@ -75,8 +29,8 @@ function Home(){
         <h3>Hi Daksh</h3>
         <h1>Welcome Home</h1>
       </div>
-      
-      <Line options={options} data={data} />
+      <AttendenceGraph />
+
 
       <div className={styles.currentPeople}>
         <h1 className={styles.mainHeading}>

@@ -32,7 +32,9 @@ model Attendence {
   firstName String
   lastName  String
   state     String   @default("Present")
-  date      DateTime
+  month     String
+  day       Int      
+  year      Int
   user      User     @relation(fields: [userId], references: [id])
 }
 

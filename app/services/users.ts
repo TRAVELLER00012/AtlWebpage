@@ -16,7 +16,7 @@ export interface User{
     user_type : "Student" | "Teacher" | "Expert"
 }
 
-class ItemList{
+class Users{
     getAllUser(){
         const controller = new AbortController();
         const request = apiClient.get<User>(DOMAIN,{signal:controller.signal})
@@ -33,4 +33,4 @@ class ItemList{
     }
 }
 
-export default new ItemList();
+export default new Users();
