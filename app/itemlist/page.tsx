@@ -1,6 +1,6 @@
 import styles from "../styles/item-list.module.css"
 import ItemCard from "../components/ItemCard"
-function ItemList(){
+function ItemList(){    
     return (
         <div className={styles.main}>
             <div className={styles.itemSelection}>
