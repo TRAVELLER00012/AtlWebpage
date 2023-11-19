@@ -2,6 +2,7 @@ import { NextResponse,NextRequest } from "next/server";
 import prisma from "@/prisma/client";
 
 
-async function GET(request : NextRequest){
-    return NextResponse.json(await prisma.attendence.findMany())
+export async function GET(request : NextRequest){
+    const respone = await prisma.attendence.findMany();
+    return NextResponse.json(respone)
 }
