@@ -3,7 +3,7 @@ import UserLogo from "@/public/images/profile.png"
 import Card from './Card'
 import { useEffect, useState } from "react"
 import usersService from "../services/users"
-import { User } from "@prisma/client"
+import { User } from "../services/users"
 import { CanceledError } from "../services/api-client"
 
 const UserList = () => {

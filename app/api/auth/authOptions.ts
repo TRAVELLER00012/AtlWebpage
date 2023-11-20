@@ -7,11 +7,11 @@ export const authOptions : NextAuthOptions = {
     providers:[
         CredentialsProvider({
             name: 'Credentials',
-            credentials : {
-                firstName : {label: "User First Name",type:"text",placeholder: "Your First Name"},
-                lasttName : {label: "User Last Name",type:"text",placeholder: "Your Last Name"},
-                email : {label: "Email",type:"email",placeholder: "Your Email"},
-                password : {label: "Password",type:"password",placeholder: "Your Password"},
+            _credentials: {
+                firstName: { label: "User First Name", type: "text", placeholder: "Your First Name" },
+                lasttName: { label: "User Last Name", type: "text", placeholder: "Your Last Name" },
+                email: { label: "Email", type: "email", placeholder: "Your Email" },
+                password: { label: "Password", type: "password", placeholder: "Your Password" },
             },
             async authorize(credentials,req) {
                 if (!credentials?.email || !credentials.password) return null;
@@ -33,3 +33,4 @@ export const authOptions : NextAuthOptions = {
       strategy: "jwt",
     },
 }
+

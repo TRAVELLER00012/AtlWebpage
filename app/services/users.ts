@@ -6,13 +6,12 @@ export interface User{
     id : number
     firstName : string
     lastName : string
-    password : string
     age : number
     number_of_years_in_atl : number
     phonenumber : number
     bus_number : string
     email : string
-    class : string
+    class : number
     section : string
     user_type : "Student" | "Teacher" | "Expert"
 }
