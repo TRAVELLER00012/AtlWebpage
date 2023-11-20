@@ -23,7 +23,7 @@ const ItemListComponent = () => {
     return(
         <>
             {console.log(items)}
-            {items.map(item =><ItemCard count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
+            {items.map(item =><ItemCard key={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
         </>
 
     )

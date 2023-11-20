@@ -6,7 +6,7 @@ export interface Item{
     id : number
     itemId : number
     userId : number
-    name : string
+    itemName : string
     quantity : number
     dateOfIssue : string
     dateOfReturn : string
@@ -15,7 +15,7 @@ export interface Item{
 class IssuedItem{
     getAllItems(){
         const controller = new AbortController();
-        const request = apiClient.get<Item>(DOMAIN,{signal:controller.signal})
+        const request = apiClient.get<Item[]>(DOMAIN,{signal:controller.signal})
         return {request,cancel : () => controller.abort()}
     }
     deleteIssuedItem(id:number){
