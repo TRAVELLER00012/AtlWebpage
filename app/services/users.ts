@@ -13,7 +13,7 @@ export interface User{
     email : string
     class : number
     section : string
-    user_type : "Student" | "Teacher" | "Expert"
+    user_type : "Student" | "Teacher" | "Moderator"
 }
 
 class Users{
