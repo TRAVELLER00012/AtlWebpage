@@ -5,6 +5,7 @@ import itemListService from "../services/itemListService"
 import { Item } from "../services/itemListService";
 import { CanceledError } from "../services/api-client";
 import ItemCard from "../components/ItemCard"
+import Alert from "./Alert";
 const ItemListComponent = () => {
     const [items,setItems] = useState<Item[]>([]);
 
@@ -22,8 +23,7 @@ const ItemListComponent = () => {
 
     return(
         <>
-            {console.log(items)}
-            {items.map(item =><ItemCard key={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
+            {items.length == 0 ? <Alert>No Items in List...</Alert> : items.map(item =><ItemCard key={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
         </>
 
     )

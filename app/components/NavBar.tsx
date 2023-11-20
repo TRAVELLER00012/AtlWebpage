@@ -25,7 +25,7 @@ const NavBar = () => {
               <li><Link href={"."}>Home</Link></li>
               <li><Link href={"./itemlist"}>Item List</Link></li>
               <li><Link href={"./issueitems"}>Issue Items</Link></li>
-              <li>Paths</li>
+              <li><Link href={"./paths"}>Paths</Link></li>
               <li>Profile</li>
               {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
          
@@ -38,8 +38,9 @@ const NavBar = () => {
                 <li><Link href={"."}>Home</Link></li>
                 <li><Link href={"./itemlist"}>Item List</Link></li>
                 <li><Link href={"./issueitems"}>Issue Items</Link></li>
-                <li>Paths</li>
+                <li><Link href={"./paths"}>Paths</Link></li>
                 <li>Profile</li>
+                {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
           </ul>
         </div>
       </div>

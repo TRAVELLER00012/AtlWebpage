@@ -1,17 +1,16 @@
-import { redirect } from "next/navigation";
 import styles from "../styles/auth.module.css"
 import Link from "next/link";
 
 const AuthCommander = () => {
   return (
     <>
-        <div className={styles.mainPage}>
-            <Link href={"/api/auth/signin"} className = {styles.button}><span>Login</span></Link>
-            <Link href={"/api/auth/signup"}className = {styles.button}><span>Register</span></Link>
-
-        </div>
+      <div className={styles.mainPage}>
+        <Link href={"/api/auth/signin"} className = {styles.button}><span>Login</span></Link>
+        
+        <Link href={"/api/auth/signup"}className = {styles.button}><span>Register</span></Link>
+      </div>
     </>
   )
 }
 
-export default AuthCommander
+export default    AuthCommander          
