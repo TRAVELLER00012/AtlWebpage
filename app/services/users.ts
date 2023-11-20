@@ -1,13 +1,14 @@
 import apiClient from "./api-client";
 
-const DOMAIN = "/items/"
+const DOMAIN = "/users/"
 
 export interface User{
     id : number
     firstName : string
     lastName : string
+    password : string
     age : number
-    number_of_years_in_atl : boolean
+    number_of_years_in_atl : number
     phonenumber : number
     bus_number : string
     email : string
@@ -19,7 +20,7 @@ export interface User{
 class Users{
     getAllUser(){
         const controller = new AbortController();
-        const request = apiClient.get<User>(DOMAIN,{signal:controller.signal})
+        const request = apiClient.get<User[]>(DOMAIN,{signal:controller.signal})
         return {request,cancel : () => controller.abort()}
     }
     deleteUser(id:number){

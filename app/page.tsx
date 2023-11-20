@@ -1,12 +1,11 @@
 import styles from "./styles/homepage.module.css"
 import Card from "./components/Card";
 import Link from "next/link";
-
-import UserLogo from "@/public/images/profile.png"
 import ItemList from "@/public/images/task-list.png"
 import IssueItem from "@/public/images/issue-item.png"
 import ReturnItem from "@/public/images/return.png"
 import AttendenceGraph from "./components/AttendenceGarph";
+import UserList from "./components/UserList";
 class Person{
   constructor(public firstName:string, public rank:string){}
 }
@@ -37,9 +36,7 @@ function Home(){
           Current People Enrolled in ATL
         </h1>
         <div className={styles.users}>
-          {users.map(user => (
-            <Card img={UserLogo} innerDes={user.rank}>{user.firstName}</Card>
-          ))}
+          <UserList />
         </div>
       </div>
 
