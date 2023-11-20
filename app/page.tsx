@@ -6,9 +6,13 @@ import IssueItem from "@/public/images/issue-item.png"
 import ReturnItem from "@/public/images/return.png"
 import AttendenceGraph from "./components/AttendenceGarph";
 import UserList from "./components/UserList";
-async function Home(){
+import EnsureAuthentication from "./components/EnsureAuthentication";
+
+function Home(){
+
   return (
     <>
+      <EnsureAuthentication />
       <div className={styles.headings}>
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>

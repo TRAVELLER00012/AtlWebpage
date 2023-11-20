@@ -6,12 +6,14 @@ import styles from "../styles/nav-bar.module.css"
 import NavLogo from "@/public/images/arduino.png"
 import Link from "next/link"
 import { useState } from "react"
+import { useSession } from "next-auth/react"
 
 const NavBar = () => {
   const [visible, setVisibility] = useState(false);
   const onMenuClick = () =>{
     setVisibility(!visible)
   }
+  const {status,data} = useSession();
   return (
     <>
       <div className={styles.navbar}>
@@ -25,6 +27,8 @@ const NavBar = () => {
               <li><Link href={"./issueitems"}>Issue Items</Link></li>
               <li>Paths</li>
               <li>Profile</li>
+              {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
+         
         </ul>
         <Image src={MenuImg} alt="Menu Bar img" className={styles.menu} onClick={() => onMenuClick()}/>
       </div>

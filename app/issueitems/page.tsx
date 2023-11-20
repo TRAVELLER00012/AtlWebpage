@@ -1,10 +1,13 @@
 import styles from "../styles/issueitems.module.css"
 import IssueItemList from "../components/IssueItemList";
+import EnsureAuthentication from "../components/EnsureAuthentication";
 
 function IssueItems(){
 
     return (
-        <div className={styles.main}>
+       <>
+            <EnsureAuthentication />
+            <div className={styles.main}>
             <div className={styles.itemSelection}>
                 <div>
                     Sr. No
@@ -18,7 +21,7 @@ function IssueItems(){
                     Quantity
                 </div>
                 <div>
-                   Date Issued 
+                    Date Issued 
                 </div>
                 <div>
                     Return Date
@@ -32,6 +35,7 @@ function IssueItems(){
                 <IssueItemList />
             </div>
         </div>
+       </>
     )
 }
 

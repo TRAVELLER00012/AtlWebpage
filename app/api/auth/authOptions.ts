@@ -13,6 +13,12 @@ export const authOptions : NextAuthOptions = {
                 email: { label: "Email", type: "email", placeholder: "Your Email" },
                 password: { label: "Password", type: "password", placeholder: "Your Password" },
             },
+            get credentials() {
+                return this._credentials;
+            },
+            set credentials(value) {
+                this._credentials = value;
+            },
             async authorize(credentials,req) {
                 if (!credentials?.email || !credentials.password) return null;
                 const user = await prisma.user.findFirst({where: {
@@ -31,6 +37,9 @@ export const authOptions : NextAuthOptions = {
     ],
     session: {
       strategy: "jwt",
-    },
+    },  
+    pages: {
+        // newUser: '/' // New users will be directed here on first sign in (leave the property out if not of interest)
+      }
 }
 

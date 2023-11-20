@@ -1,7 +1,8 @@
-import middleware from "next-auth/middleware";
-export default middleware;
+import { NextRequest, NextResponse } from "next/server";
 
-
+export default function middleware(request : NextRequest){
+    return NextResponse.json({error:"Not Authenticated"},{status:400})
+}
 export const config = {
-    matcher: ['/itemlist/']
+    matcher : ['/api/users']
 }
