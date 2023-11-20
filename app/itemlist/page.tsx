@@ -1,5 +1,6 @@
 import styles from "../styles/item-list.module.css"
 import ItemCard from "../components/ItemCard"
+import ItemListComponent from "../components/ItemListComponent"
 function ItemList(){    
     return (
         <div className={styles.main}>
@@ -22,37 +23,7 @@ function ItemList(){
                 </div>
             </div>
             <div className={styles.items}>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
-                <ItemCard  count={1} name="D" quantity={1} issuable="Yes"/>
+               <ItemListComponent />
             </div>
         </div>
     )

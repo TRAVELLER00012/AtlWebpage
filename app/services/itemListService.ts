@@ -12,7 +12,7 @@ export interface Item{
 class ItemList{
     getAllItems(){
         const controller = new AbortController();
-        const request = apiClient.get<Item>(DOMAIN,{signal:controller.signal})
+        const request = apiClient.get<Item[]>(DOMAIN,{signal:controller.signal})
         return {request,cancel : () => controller.abort()}
     }
     deleteItem(id:number){
