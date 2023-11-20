@@ -7,7 +7,7 @@ interface Props{
 }
 function ItemCard({count,issuable,name,quantity}:Props){
     return (
-        <div className={styles.parentItem}>
+        <div className={[styles.parentItem,styles.itemCard].join(" ")}>
             <div>{count}</div>
             <div>{name}</div>
             <div>{quantity}</div>

@@ -30,7 +30,6 @@ function IssueItems(){
             </div>
             <div className={styles.items}>
                 <IssueItemList />
-                {/* <IssueItemCard  count={1} name="D" quantity={1} issueDate="tommorroq331231231231231231827389172938712937819723912739812312312312w" returnDate="tomorrow"/> */}
             </div>
         </div>
     )

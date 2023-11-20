@@ -1,6 +1,6 @@
 .itemSelection{
     display:grid;
-    grid-template-columns: 13% 23% 13% 19.5% 19.5%auto;
+    grid-template-columns: 13% 23% 13% 19.5% 19.5% auto;
     column-gap: 10px;
     margin-top: 25px;
     text-align: center;
@@ -15,4 +15,15 @@
 }
 .remove{
     color: tomato;
+}
+
+@media screen and (max-width: 770px) {
+    .itemSelection,  .items div{
+        font-size: 0.75rem;
+    }
+    .itemSelection{
+        grid-template-columns: repeat(3,33%);
+        grid-template-rows: repeat(2,50%);
+        row-gap: 10px;
+    }
 }

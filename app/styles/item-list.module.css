@@ -18,6 +18,15 @@
     border-radius: 10px;
     text-align: center;
 }
+.itemList, .itemCard div{
+    overflow-x: scroll;
+}
 .remove{
     color:tomato
+}
+
+@media screen and (max-width: 770px) {
+    .itemList, .itemList div{
+        font-size: 0.75rem;
+    }
 }

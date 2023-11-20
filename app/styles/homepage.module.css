@@ -19,4 +19,5 @@
 }
 .itemList{
     display: flex;
+    overflow-x: scroll;
 }
