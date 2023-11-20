@@ -17,7 +17,7 @@ model User {
   phonenumber            Int
   bus_number             String
   email                  String
-  class                  String
+  class                  Int
   section                String
   user_type              String
 

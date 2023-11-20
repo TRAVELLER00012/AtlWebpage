@@ -6,26 +6,11 @@ import IssueItem from "@/public/images/issue-item.png"
 import ReturnItem from "@/public/images/return.png"
 import AttendenceGraph from "./components/AttendenceGarph";
 import UserList from "./components/UserList";
-class Person{
-  constructor(public firstName:string, public rank:string){}
-}
-const users = [new Person("Daksh","Teacher",),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Student"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper"),
-new Person("Daksh","Devolper")]
-function Home(){
-
+async function Home(){
   return (
     <>
       <div className={styles.headings}>
-        <h3>Hi Daksh</h3>
+        <h3>Hi User!</h3>
         <h1>Welcome Home</h1>
       </div>
       <AttendenceGraph />
