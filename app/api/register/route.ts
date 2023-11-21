@@ -1,27 +1,11 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import {z} from "zod"
 import bcrypt from "bcrypt"
 
-const schema = z.object({
-    firstName : z.string(),
-    lastName : z.string(),
-    password : z.string(),
-    age : z.number().min(3),
-    number_of_years_in_atl : z.number(),
-    phonenumber : z.number(),
-    bus_number : z.string(),
-    email : z.string().email(),
-    class : z.number(),
-    section : z.string(),
-    user_type : z.string()
-    
-})
+
 
 export async function POST(request: NextRequest){
     const body = await request.json();
-    const validation = schema.safeParse(body);
-    if (!validation.success) return NextResponse.json(validation.error.errors, {status: 400})
     const user = await prisma.user.findFirst({
         where:{
             email: body.email

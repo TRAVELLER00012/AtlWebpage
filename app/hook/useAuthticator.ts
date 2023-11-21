@@ -3,6 +3,6 @@ import { redirect } from "next/navigation";
 
 export default function useAuthenticator(){
     const {status} = useSession();
-    if (status === "unauthenticated") redirect("/api/auth/signin/")
+    if (status === "unauthenticated") redirect("./auth/")
 
 }

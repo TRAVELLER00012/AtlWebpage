@@ -1,11 +1,13 @@
 import styles from "../styles/issueitems.module.css"
 import IssueItemList from "../components/IssueItemList";
 import EnsureAuthentication from "../components/EnsureAuthentication";
+import NavBar from "../components/NavBar";
 
 function IssueItems(){
 
     return (
        <>
+            <NavBar />
             <EnsureAuthentication />
             <div className={styles.main}>
             <div className={styles.itemSelection}>

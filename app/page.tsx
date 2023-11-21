@@ -7,12 +7,14 @@ import ReturnItem from "@/public/images/return.png"
 import AttendenceGraph from "./components/AttendenceGarph";
 import UserList from "./components/UserList";
 import EnsureAuthentication from "./components/EnsureAuthentication";
+import NavBar from "./components/NavBar";
 
 function Home(){
 
   return (
     <>
       <EnsureAuthentication />
+      <NavBar />
       <div className={styles.headings}>
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>

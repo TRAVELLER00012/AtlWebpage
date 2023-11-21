@@ -1,0 +1,116 @@
+.registerPage{
+    height: 85%;
+    padding: 10px 20px;
+    background: rgb(8,7,42);
+    background: linear-gradient(90deg, rgba(8,7,42,1) 12%, rgba(9,9,121,1) 48%, rgba(5,196,235,1) 93%);
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+}
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.heading h1{
+    font-size: 3rem;
+}
+.content{
+    display: grid;
+    grid-template-columns: 20% auto;
+    column-gap: 50px;
+}
+
+.item{
+    background-color: #4287f5;
+    width: 80%;
+    font-weight: 500;
+    font-size: 1.25rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    cursor: default;
+}
+.closeButton{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.closeButton span{
+    margin-right: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.3s
+}
+.closeButton:hover span{
+    color: red;
+}
+
+.selected{
+    position: relative;
+    width: 100%;
+    clip-path: polygon(0 0, 0 0, 60% 0%, 64% 48%, 60% 100%, 0 100%, 0 100%);
+    padding: 20px 50px;
+    right: 15%;
+}
+.data form{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    justify-content: center;
+}
+.data .layer1{
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+}
+.data .layer2{
+    margin-top: 50px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+}
+.data .layer1, .data .layer2{
+    display: grid;
+    column-gap: 80px;
+    row-gap: 40px;
+    padding-right: 50px;
+}
+.data .layer3{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-self: center;
+    column-gap: 10px;
+    margin-top: 50px;
+}
+.data .layer3 button{
+    padding: 10px 20px;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.data .layer3 .reset{
+    background-color: #6c757d;
+}
+.data .layer3 .submit{
+    background-color: #4287f5;
+}
+.data input{
+    width: 100%;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    padding: 10px 20px;
+    margin-top: 5px;
+}
+.data label{
+    font-size: 1.15rem;
+}
+
+.important::after{
+    content: "*";
+    color: red;
+}
