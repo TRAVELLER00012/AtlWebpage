@@ -1,3 +1,4 @@
+import prisma from "@/prisma/client";
 import apiClient from "./api-client";
 
 const DOMAIN = "/issueditems/"
@@ -17,6 +18,9 @@ class IssuedItem{
         const controller = new AbortController();
         const request = apiClient.get<Item[]>(DOMAIN,{signal:controller.signal})
         return {request,cancel : () => controller.abort()}
+    }
+    getItem(id : number){
+        return apiClient.get<Item>(DOMAIN+id)
     }
     deleteIssuedItem(id:number){
         return apiClient.delete(DOMAIN+id)

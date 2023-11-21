@@ -1,0 +1,31 @@
+.extraInfo{
+    position: fixed;
+    display: grid;
+    grid-template-rows: 15% auto;
+    width: 90%;
+    height: 70%;
+    background-color: rgb(39,44,58);
+    border: 5px solid #00ffa8;
+    border-radius: 10px;
+    padding: 15px;
+    top: 10%;
+}
+.extraInfo .heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content div{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 10px ;
+    margin-bottom: 20px;
+}
+.content div span{
+    background-color: rgba(25,28,37,1);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.close{
+    cursor: pointer;
+}

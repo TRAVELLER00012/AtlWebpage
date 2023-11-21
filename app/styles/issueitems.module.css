@@ -10,13 +10,12 @@
     padding: 10px 20px;
     border-radius: 10px;
 }
-.items div{
-    overflow-x: scroll;
-}
 .remove{
     color: tomato;
 }
-
+.name{
+    cursor: pointer;
+}
 @media screen and (max-width: 770px) {
     .itemSelection,  .items div{
         font-size: 0.75rem;

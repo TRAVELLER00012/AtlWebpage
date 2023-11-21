@@ -29,7 +29,7 @@ function ItemList(){
                     </div>
                 </div>
                 <div className={styles.items}>
-                <ItemListComponent />
+                    <ItemListComponent />
                 </div>
             </div>
         </>
