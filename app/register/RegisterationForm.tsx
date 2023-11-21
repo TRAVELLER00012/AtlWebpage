@@ -3,6 +3,7 @@ import Image from "next/image";
 import CloseIcon from "@/public/images/close.png"
 import styles from "../styles/register.module.css";
 import { useRef } from "react";
+import axios from "axios";
 
 export const RegisterationForm = () => {
 
@@ -28,7 +29,21 @@ export const RegisterationForm = () => {
                     <div className={[styles.item,styles.selected].join(" ")}>Fill your details</div>
                 </div>
                     <div className={styles.data}>
-                        <form>
+                        <form onSubmit={async (event) => {
+                            event.preventDefault()
+                            const response = await axios.post("http://localhost:3000/api/register", {
+                                age: parseInt(age.current!.value),
+                                firstName: firstName.current!.value,
+                                lastName: lastName.current!.value,
+                                phoneNumber: parseInt(phoneNumber.current!.value),
+                                number_of_years_in_atl: parseInt(years_in_atl.current!.value),
+                                bus_number: bus_number.current!.value,
+                                class: parseInt(userClass.current!.value),
+                                section: section.current!.value,
+                                email: email.current!.value,
+                                password: password.current!.value,
+                              })
+                        }}>
                             <div className={styles.layer1}>
                                 <div>
                                     <label htmlFor="firstName" className={styles.important}>First Name</label>
@@ -63,14 +78,14 @@ export const RegisterationForm = () => {
                             </div>
                             <div className={styles.layer2}>
                                 <div>
-                                    <label htmlFor="class">Class</label>
+                                    <label htmlFor="class" className={styles.important}>Class</label>
                                     <br />
-                                    <input type="number" id="class" min={6} max={12} ref={userClass} />
+                                    <input type="number" id="class" min={6} max={12} ref={userClass} required  />
                                 </div>
                                 <div>
-                                    <label htmlFor="section">Section</label>
+                                    <label htmlFor="section" className={styles.important}>Section</label>
                                     <br />
-                                    <input type="text" id="section"maxLength={1}  ref={section}/>
+                                    <input type="text" id="section"maxLength={1}  ref={section} required/>
                                 </div>
                                 <div>
                                     <label htmlFor="email" className={styles.important}>Email</label>
