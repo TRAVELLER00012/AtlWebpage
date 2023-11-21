@@ -2,10 +2,14 @@
 import Image from "next/image";
 import CloseIcon from "@/public/images/close.png"
 import styles from "../styles/register.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
+import CanceledError from "../services/api-client"
+import { redirect } from "next/navigation";
 
 export const RegisterationForm = () => {
+    const [error,setError] = useState("")
+    const [succesful, setSuccesful] = useState(false)
     const firstName = useRef<HTMLInputElement>(null);
     const lastName = useRef<HTMLInputElement>(null);
     const phoneNumber = useRef<HTMLInputElement>(null);
@@ -16,7 +20,7 @@ export const RegisterationForm = () => {
     const section = useRef<HTMLInputElement>(null);
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
-
+    if (succesful) redirect("/api/auth/signin")
     return (
         <div className={styles.registerPage}>
             <div className={styles.heading}>
@@ -26,11 +30,12 @@ export const RegisterationForm = () => {
             <div className={styles.content}>
                 <div className={styles.nav}>
                     <div className={[styles.item,styles.selected].join(" ")}>Fill your details</div>
+                {error && <div className={styles.status}>{error}</div>}
                 </div>
                     <div className={styles.data}>
                         <form onSubmit={async (event) => {
                             event.preventDefault()
-                            const response = await axios.post("http://localhost:3000/api/register", {
+                            await axios.post("http://localhost:3000/api/register", {
                                 age: parseInt(age.current!.value),
                                 firstName: firstName.current!.value,
                                 lastName: lastName.current!.value,
@@ -42,6 +47,13 @@ export const RegisterationForm = () => {
                                 email: email.current!.value,
                                 password: password.current!.value,
                                 user_type:"Student"
+                              }).then(res =>{
+                                setError("")
+                                setSuccesful(true)
+                              })
+                              .catch(err =>{
+                                    if (err == CanceledError) return;
+                                    setError(err.message)
                               })
                         }}>
                             <div className={styles.layer1}>

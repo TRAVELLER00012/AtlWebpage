@@ -13,4 +13,4 @@ const AuthCommander = () => {
   )
 }
 
-export default    AuthCommander          
+export default AuthCommander          

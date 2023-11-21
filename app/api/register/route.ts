@@ -31,5 +31,6 @@ export async function POST(request: NextRequest){
             user_type: body.user_type
         }
     })
-    return NextResponse.redirect(new URL("/api/auth/signin",request.url))
+
+    return NextResponse.json({email: newUser.email})
 }
