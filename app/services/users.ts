@@ -25,7 +25,6 @@ class Users{
     getUser(id : number){
         const request = apiClient.get<User>(DOMAIN+id)
         return request;
-
     }
     deleteUser(id:number){
         return apiClient.delete(DOMAIN+id)

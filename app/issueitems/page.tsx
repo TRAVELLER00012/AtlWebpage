@@ -1,10 +1,13 @@
+'use client'
 import styles from "../styles/issueitems.module.css"
 import IssueItemList from "../components/IssueItemList";
 import EnsureAuthentication from "../components/EnsureAuthentication";
 import NavBar from "../components/NavBar";
+import { useSession } from "next-auth/react";
 
 function IssueItems(){
-
+    const session = useSession();
+    const email = session.data?.user?.email;
     return (
        <>
             <NavBar />
@@ -34,7 +37,7 @@ function IssueItems(){
 
             </div>
             <div className={styles.items}>
-                <IssueItemList />
+                <IssueItemList email={localStorage.getItem('userEmail')!} />
             </div>
         </div>
        </>

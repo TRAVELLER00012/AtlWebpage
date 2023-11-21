@@ -1,11 +1,31 @@
 -- CreateTable
+CREATE TABLE `User` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `firstName` VARCHAR(191) NOT NULL,
+    `lastName` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
+    `age` INTEGER NOT NULL,
+    `number_of_years_in_atl` INTEGER NOT NULL,
+    `phonenumber` VARCHAR(191) NOT NULL,
+    `bus_number` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `class` INTEGER NOT NULL,
+    `section` VARCHAR(191) NOT NULL,
+    `user_type` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Attendence` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `firstName` VARCHAR(191) NOT NULL,
     `lastName` VARCHAR(191) NOT NULL,
     `state` VARCHAR(191) NOT NULL DEFAULT 'Present',
-    `date` DATETIME(3) NOT NULL,
+    `month` VARCHAR(191) NOT NULL,
+    `day` INTEGER NOT NULL,
+    `year` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
