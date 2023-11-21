@@ -1,8 +1,8 @@
 .registerPage{
     height: 85%;
     padding: 10px 20px;
-    background: rgb(8,7,42);
-    background: linear-gradient(90deg, rgba(8,7,42,1) 12%, rgba(9,9,121,1) 48%, rgba(5,196,235,1) 93%);
+    background: rgb(15,15,15);
+    background: linear-gradient(90deg, rgba(15,15,15,1) 32%, rgba(75,75,75,1) 62%, rgba(124,124,124,1) 75%);
     border-radius: 10px;
     display: grid;
     grid-template-rows: 1fr 5fr;
@@ -32,9 +32,11 @@
     cursor: default;
 }
 .closeButton{
+    cursor: pointer;
+}
+.closeButton a{
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 .closeButton span{
     margin-right: 10px;
@@ -42,8 +44,12 @@
     text-transform: uppercase;
     transition: color 0.3s
 }
+.closeButton a:any-link{
+    color: white;
+    text-decoration: none;
+}
 .closeButton:hover span{
-    color: red;
+    color: red; 
 }
 
 .selected{

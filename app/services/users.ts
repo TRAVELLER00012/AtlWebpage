@@ -25,9 +25,6 @@ class Users{
     deleteUser(id:number){
         return apiClient.delete(DOMAIN+id)
     }
-    addUser(item:User){
-        return apiClient.post(DOMAIN+item)
-    }
     updateUser(item:User){
         return apiClient.patch(DOMAIN+item.id,item)
     }
