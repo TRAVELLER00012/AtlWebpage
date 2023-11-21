@@ -24,7 +24,7 @@ const UserList = () => {
     return (
         <>
             {users.map(user =>(
-                <Card img={UserLogo} innerDes={user.user_type} key={user.id}>{user.firstName} {user.lastName}</Card>
+                <Card img={UserLogo} innerDes={user.user_type} key={user.id} id={user.id} heading={`${user.firstName} ${user.lastName}`} userInfo={true} />
             ))}
         </>
     )

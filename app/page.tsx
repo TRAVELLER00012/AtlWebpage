@@ -36,9 +36,9 @@ function Home(){
         <h1>Check out some of the Features!</h1>
         <div className={styles.shortcuts}>
           <div className={styles.itemList}>
-              <Card img={ItemList} innerDes={"Check out the items we have!"}><Link href={"./itemlist"}>Item List</Link></Card>
-              <Card img={IssueItem} innerDes={"Issue an Item from atl lab!"}><Link href={"./issueitems"}>Issue An Item</Link></Card>
-              <Card img={ReturnItem} innerDes={"You have nothing to return yet!"}><Link href={"./issueitems"}>Return An Item</Link></Card>
+              <Card img={ItemList} innerDes={"Check out the items we have!"} heading={<Link href={"./itemlist"}>Item List</Link>} id={1} userInfo={false}/>
+              <Card img={IssueItem} innerDes={"Issue an Item from atl lab!"} heading={<Link href={"./issueitems"}>Issue An Item</Link>} id={2} userInfo={false}/>
+              <Card img={ReturnItem} innerDes={"You have nothing to return yet!"} heading={<Link href={"./issueitems"}>Return An Item</Link>} id={3} userInfo={false}/>
           </div>
         </div>
       </div>

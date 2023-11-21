@@ -1,22 +1,39 @@
+'use client'
 import Image, { StaticImageData } from "next/image";
 import styles from '../styles/card-styles.module.css'
-import { ReactNode } from "react";
+import {ReactNode, useState } from "react";
+import UserExtraInfoCard from "./UserExtraInfoCard";
 
 interface Props{
-    children:ReactNode,
+    heading:ReactNode,
+    id:number,
     innerDes:string,
-    img:StaticImageData
+    img:StaticImageData,
+    userInfo:boolean
 }
 
-function Card({children,innerDes: rank,img: userImg}:Props){
+function Card({heading,id,innerDes: rank,img: userImg,userInfo}:Props){
+    const [showExtraInfo, setShowExtraInfo] = useState(false);
+    const showExtraInformation = (showExtra : boolean, showUser : boolean) => {
+      if (showExtra){
+        if (showUser) return <UserExtraInfoCard id={id} key={id} showExtraInfo={setShowExtraInfo}/>
+      }
+    }
     return(
-        <div className={styles.card}>
-        <Image src={userImg} alt="user logo" />
-        <div className={styles.userDetails}>
-          <h1>{children}</h1>
-          <h5>{rank}</h5>
+      <>
+
+        <div className={styles.card} onClick={() => {
+          setShowExtraInfo(!showExtraInfo)          
+        }}>
+          <Image src={userImg} alt="user logo" />
+          <div className={styles.userDetails}>
+            <h1>{heading}</h1>
+            <h5>{rank}</h5>
+          </div>
         </div>
-      </div>
+        {showExtraInformation(showExtraInfo,userInfo)}
+
+      </>
     )
 }
 export default Card;
