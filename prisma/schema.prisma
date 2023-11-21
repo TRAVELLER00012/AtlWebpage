@@ -14,7 +14,7 @@ model User {
   password               String
   age                    Int
   number_of_years_in_atl Int
-  phonenumber            Int
+  phonenumber            String
   bus_number             String
   email                  String
   class                  Int

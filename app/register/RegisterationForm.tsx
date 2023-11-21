@@ -6,7 +6,6 @@ import { useRef } from "react";
 import axios from "axios";
 
 export const RegisterationForm = () => {
-
     const firstName = useRef<HTMLInputElement>(null);
     const lastName = useRef<HTMLInputElement>(null);
     const phoneNumber = useRef<HTMLInputElement>(null);
@@ -35,13 +34,14 @@ export const RegisterationForm = () => {
                                 age: parseInt(age.current!.value),
                                 firstName: firstName.current!.value,
                                 lastName: lastName.current!.value,
-                                phoneNumber: parseInt(phoneNumber.current!.value),
+                                phonenumber: phoneNumber.current!.value,
                                 number_of_years_in_atl: parseInt(years_in_atl.current!.value),
                                 bus_number: bus_number.current!.value,
                                 class: parseInt(userClass.current!.value),
                                 section: section.current!.value,
                                 email: email.current!.value,
                                 password: password.current!.value,
+                                user_type:"Student"
                               })
                         }}>
                             <div className={styles.layer1}>

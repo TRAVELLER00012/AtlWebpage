@@ -1,6 +1,7 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt"
+import { redirect } from "next/dist/server/api-utils";
 
 
 
@@ -17,7 +18,6 @@ export async function POST(request: NextRequest){
     const hashedPassword = await bcrypt.hash(body.password, 10)
     const newUser = await prisma.user.create({
         data:{
-            id:0,
             age: body.age,
             bus_number: body.bus_number,
             class: body.class,
@@ -31,6 +31,5 @@ export async function POST(request: NextRequest){
             user_type: body.user_type
         }
     })
-    
-    return NextResponse.json({email: newUser.email})
+    return NextResponse.redirect(new URL("/api/auth/signin",request.url))
 }
