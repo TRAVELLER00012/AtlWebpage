@@ -6,6 +6,7 @@
     border-radius: 10px;
     width: fit-content;
     margin-right: 15px;
+    cursor: pointer;
 }
 .card .userDetails{
     margin-left: 15px;

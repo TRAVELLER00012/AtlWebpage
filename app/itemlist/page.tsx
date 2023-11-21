@@ -1,7 +1,9 @@
+'use client'
 import styles from "../styles/item-list.module.css"
 import ItemListComponent from "../components/ItemListComponent"
 import EnsureAuthentication from "../components/EnsureAuthentication"
 import NavBar from "../components/NavBar"
+
 function ItemList(){    
     return (
         <>
@@ -14,7 +16,7 @@ function ItemList(){
                         Sr. No
                     </div>
                     
-                    <div className="name">
+                    <div >
                         Name
                     </div>
                     

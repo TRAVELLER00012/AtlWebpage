@@ -15,6 +15,9 @@ class ItemList{
         const request = apiClient.get<Item[]>(DOMAIN,{signal:controller.signal})
         return {request,cancel : () => controller.abort()}
     }
+    getItem(id : number){
+        return apiClient.get<Item>(DOMAIN+id)
+    }
     deleteItem(id:number){
         return apiClient.delete(DOMAIN+id)
     }

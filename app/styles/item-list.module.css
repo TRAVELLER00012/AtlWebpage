@@ -24,6 +24,9 @@
 .remove{
     color:tomato
 }
+.name{
+    cursor: pointer;
+}
 
 @media screen and (max-width: 770px) {
     .itemList, .itemList div{

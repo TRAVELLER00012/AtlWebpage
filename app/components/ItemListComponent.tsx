@@ -23,7 +23,7 @@ const ItemListComponent = () => {
 
     return(
         <>
-            {items.length == 0 ? <Alert>No Items in List...</Alert> : items.map(item =><ItemCard key={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
+            {items.length == 0 ? <Alert>No Items in List...</Alert> : items.map(item =><ItemCard key={item.id} id={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
         </>
 
     )
