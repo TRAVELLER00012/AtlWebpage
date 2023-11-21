@@ -4,10 +4,18 @@ import IssueItemList from "../components/IssueItemList";
 import EnsureAuthentication from "../components/EnsureAuthentication";
 import NavBar from "../components/NavBar";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 function IssueItems(){
-    const session = useSession();
-    const email = session.data?.user?.email;
+    const [email,setEmail] = useState<string>()
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const storedEmail = localStorage.getItem('userEmail');
+        if (storedEmail) {
+            setEmail(storedEmail)
+        }
+      }
+    }, []);
     return (
        <>
             <NavBar />
@@ -37,7 +45,7 @@ function IssueItems(){
 
             </div>
             <div className={styles.items}>
-                <IssueItemList email={localStorage.getItem('userEmail')!} />
+                <IssueItemList email={email!} />
             </div>
         </div>
        </>

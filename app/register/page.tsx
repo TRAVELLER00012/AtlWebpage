@@ -8,7 +8,7 @@ import CanceledError from "../services/api-client"
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-export const RegisterationForm = () => {
+function RegisterationForm() {
     const [error,setError] = useState("")
     const [succesful, setSuccesful] = useState(false)
     const firstName = useRef<HTMLInputElement>(null);
