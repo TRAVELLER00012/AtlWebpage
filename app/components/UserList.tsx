@@ -21,7 +21,7 @@ const UserList = () => {
 
         return () => cancel()
 
-    },[users.length])
+    },[])
     
     return (
         <>
