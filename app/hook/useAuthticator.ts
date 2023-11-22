@@ -10,9 +10,9 @@ export default function useAuthenticator() {
         const email = data?.user?.email;
   
         
-        // if(typeof window !== "undefined" && window.sessionStorage){
-        if (email) sessionStorage.setItem('userEmail', email); 
-        // }
+        if(typeof window !== "undefined" && window.sessionStorage){
+          if (email) sessionStorage.setItem('userEmail', email); 
+        }
             
         
     }

@@ -14,12 +14,12 @@ import { useEffect, useState } from "react";
 function Home(){
   const [email,setEmail] = useState<string>()
   useEffect(() =>{
-    // if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       const storedEmail = sessionStorage.getItem('userEmail');
       if (storedEmail) {
         setEmail(storedEmail)
       }
-    // }
+    }
   },[])
   return (
     <>
