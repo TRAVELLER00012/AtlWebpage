@@ -36,7 +36,7 @@ const [issuedItem,setIssuedItem] = useState<IssuedItem>();
         }
 
 
-    })
+    },[])
   return (
     <div className={styles.extraInfo}>
         <div className={styles.heading}>
