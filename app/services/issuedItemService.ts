@@ -22,12 +22,13 @@ class IssuedItem{
     getItem(id : number){
         return apiClient.get<Item>(DOMAIN+id)
     }
-    deleteIssuedItem(id:number){
-        return apiClient.delete(DOMAIN+id)
-    }
     addIssuedItem(item:Item){
         return apiClient.post(DOMAIN+item)
     }
+    deleteIssuedItem(id:number){
+        return apiClient.delete(DOMAIN+id)
+    }
+
     updateIssuedItem(item:Item){
         return apiClient.patch(DOMAIN+item.id,item)
     }

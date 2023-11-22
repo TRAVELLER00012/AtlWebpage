@@ -8,7 +8,6 @@ import ItemCard from "../components/ItemCard"
 import Alert from "./Alert";
 const ItemListComponent = () => {
     const [items,setItems] = useState<Item[]>([]);
-
     useEffect(() =>{
         let {request,cancel} = itemListService.getAllItems()
         request.then(res =>{
@@ -18,6 +17,8 @@ const ItemListComponent = () => {
         }).catch(err =>{
             if (err == CanceledError) return;
         })
+
+        
         return () => cancel();
     },[])
 

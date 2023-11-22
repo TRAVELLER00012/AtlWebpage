@@ -22,10 +22,10 @@ class ItemList{
         return apiClient.delete(DOMAIN+id)
     }
     addItem(item:Item){
-        return apiClient.post(DOMAIN+item)
+        return apiClient.post(DOMAIN,item)
     }
-    updateItem(item:Item){
-        return apiClient.patch(DOMAIN+item.id,item)
+    updateItem(id:Number,item:Item){
+        return apiClient.put(DOMAIN+id,item)
     }
 }
 

@@ -19,7 +19,7 @@ const ExtraItemInfo = ({id,visibility}:Props) => {
     })
   },[])
   return (
-        <div className={styles.extraInfo}>
+        <div className={itemData?.issuable ? styles.extraInfo : [styles.extraInfo,styles.redBorder].join(" ")}>
           <div className={styles.heading}>
               <h1>{itemData?.name}</h1>
               <Image src={CloseIcon} alt="Close icon" onClick={() => visibility(false)} className={styles.close}/>

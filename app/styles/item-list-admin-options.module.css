@@ -1,0 +1,88 @@
+.options{
+    display: flex;
+}
+.options img{
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.edit{
+    background-color: #00ffa8;
+}
+.insert{
+    background-color: dodgerblue;
+}
+.remove{
+    background-color: tomato;
+}
+.removeBox{
+    border: 5px solid tomato;
+}
+.addBox{
+    border: 5px solid rgb(84, 147, 247);
+}
+.hiddenBox{
+    position: absolute;
+    right: 25%;
+    width: 50%;
+    height: 50%;
+    background-color: rgb(39,44,58);
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.hiddenBox .heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hiddenBox .heading img{
+    cursor: pointer;
+}
+.addBox .content, .removeBox .content{
+    margin-top: 25px;
+}
+.content input,.hiddenBox select{
+    border: 0;
+    outline: 0;
+    color: white;
+    border-radius: 10px;
+    background-color: rgba(25,28,37,1);
+    padding: 10px 20px;
+}
+.addBox .content input,.addBox .content select{
+    color: white;
+}
+.content form select{
+    width: 100%;
+    color: #00ffa8;
+}
+.addBox form button, .removeBox form button{
+    margin-top: 20px;
+}
+.content form button{
+    border: 0;
+    outline: 0;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgb(84, 147, 247);
+    font-weight: bold;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+.addBox .content div, .editBox .content div{
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    margin-bottom: 15px;
+}
+.editBox .content select{
+    margin-bottom: 20px;
+}
+.important::after{
+    content: "*";
+    color: red;
+}
+.editBox{
+    border: 5px solid #00ffa8;
+}

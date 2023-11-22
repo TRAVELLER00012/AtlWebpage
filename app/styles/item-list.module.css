@@ -1,6 +1,17 @@
 .main{
     margin-top: 25px;
 }
+.hidden{
+    display: none;
+}
+.issued{
+    display: block;
+    font-size: 0.8rem;
+    background-color: orange;
+    color: black;
+    padding: 2px 5px;
+    border-radius: 10px;
+}
 .itemSelection, .items .parentItem{
     display: grid;
     grid-template-columns: 10% 50% 20% auto;
@@ -18,16 +29,18 @@
     border-radius: 10px;
     text-align: center;
 }
-.itemList, .itemCard div{
-    overflow-x: scroll;
-}
+
 .remove{
     color:tomato
 }
 .name{
     cursor: pointer;
 }
-
+.adminOptions{
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+}
 @media screen and (max-width: 770px) {
     .itemList, .itemList div{
         font-size: 0.75rem;

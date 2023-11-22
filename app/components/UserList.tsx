@@ -9,6 +9,8 @@ import { CanceledError } from "../services/api-client"
 const UserList = () => {
     const [users,setUsers] = useState<User[]>([])
     useEffect(() => {
+        console.log("CHECK");
+        
         let {request,cancel} = usersService.getAllUser();
         request.then(res =>{
             let data = res.data;
@@ -19,7 +21,7 @@ const UserList = () => {
 
         return () => cancel()
 
-    },[])
+    },[users.length])
     
     return (
         <>

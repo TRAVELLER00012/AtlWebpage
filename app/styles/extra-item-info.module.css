@@ -10,6 +10,9 @@
     padding: 15px;
     top: 10%;
 }
+.redBorder{
+    border: 5px solid tomato
+}
 .extraInfo .heading{
     display: flex;
     align-items: center;
