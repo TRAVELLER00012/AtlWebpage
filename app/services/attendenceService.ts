@@ -19,6 +19,9 @@ class Attendence{
         const request = apiClient.get<AttendenceProps[]>(DOMAIN,{signal:controller.signal})
         return {request,cancel : () => controller.abort()}
     }
+    getAttendenceUser(id:number){
+        return apiClient.get<AttendenceProps[]>(DOMAIN+id)
+    }
     deleteAttendence(id:number){
         return apiClient.delete(DOMAIN+id)
     }

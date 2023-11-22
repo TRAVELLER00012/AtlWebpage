@@ -8,10 +8,11 @@ export default function useAuthenticator() {
     redirect("./auth/"); 
   else {
         const email = data?.user?.email;
-        if(typeof window !== "undefined" && window.sessionStorage){
-            sessionStorage.setItem('userEmail', email!);
-            console.log("TEST: "+sessionStorage.getItem('userEmail'))
-        }
+  
+        
+        // if(typeof window !== "undefined" && window.sessionStorage){
+        if (email) sessionStorage.setItem('userEmail', email); 
+        // }
             
         
     }

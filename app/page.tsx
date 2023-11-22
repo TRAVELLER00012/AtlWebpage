@@ -1,3 +1,4 @@
+'use client'
 import styles from "./styles/homepage.module.css"
 import Card from "./components/Card";
 import Link from "next/link";
@@ -8,9 +9,18 @@ import AttendenceGraph from "./components/AttendenceGarph";
 import UserList from "./components/UserList";
 import EnsureAuthentication from "./components/EnsureAuthentication";
 import NavBar from "./components/NavBar";
+import { useEffect, useState } from "react";
 
 function Home(){
-
+  const [email,setEmail] = useState<string>()
+  useEffect(() =>{
+    // if (typeof window !== 'undefined') {
+      const storedEmail = sessionStorage.getItem('userEmail');
+      if (storedEmail) {
+        setEmail(storedEmail)
+      }
+    // }
+  },[])
   return (
     <>
       <EnsureAuthentication />
@@ -19,7 +29,7 @@ function Home(){
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>
       </div>
-      <AttendenceGraph />
+      {email && <AttendenceGraph email={email}/>}
 
 
       <div className={styles.currentPeople}>
