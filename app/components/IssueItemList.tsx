@@ -4,7 +4,6 @@ import IssueItemCard from "../components/IssueItemCard";
 import issuedItemService, { Item } from "../services/issuedItemService"
 import { CanceledError } from "../services/api-client"
 import Alert from "./Alert";
-import { useSession } from "next-auth/react";
 import users from "../services/users";
 interface Props{
     email : string

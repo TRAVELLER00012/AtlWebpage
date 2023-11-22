@@ -4,14 +4,11 @@ import ItemListComponent from "../components/ItemListComponent"
 import EnsureAuthentication from "../components/EnsureAuthentication"
 import NavBar from "../components/NavBar"
 import ItemListAdminOption from "../components/ItemListAdminOption"
-import { useState } from "react"
 
-function ItemList(){   
-    const [email,setEmail] = useState<string>()
-    if(typeof window !== "undefined" && window.sessionStorage){
-        const temp = sessionStorage.getItem('userEmail')
-        if (temp) setEmail(temp)
-    }
+function ItemList(){    
+    // Check if sessionStorage is available
+    const email = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('userEmail') : null;
+
     return (
         <>
             <NavBar />
