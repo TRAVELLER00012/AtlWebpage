@@ -29,7 +29,7 @@ function Home(){
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>
       </div>
-      {id && <AttendenceGraph id={id!}/>}
+      <AttendenceGraph id={id!}/>
 
 
       <div className={styles.currentPeople}>
