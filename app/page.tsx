@@ -12,12 +12,12 @@ import NavBar from "./components/NavBar";
 import { useEffect, useState } from "react";
 
 function Home(){
-  const [email,setEmail] = useState<string>()
+  const [id,setId] = useState<number>()
   useEffect(() =>{
     if (typeof window !== 'undefined') {
-      const storedEmail = sessionStorage.getItem('userEmail');
-      if (storedEmail) {
-        setEmail(storedEmail)
+      const storedId = localStorage.getItem('userId');
+      if (storedId) {
+        setId(parseInt(storedId))
       }
     }
   },[])
@@ -29,7 +29,7 @@ function Home(){
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>
       </div>
-      {email && <AttendenceGraph email={email}/>}
+      {id && <AttendenceGraph id={id!}/>}
 
 
       <div className={styles.currentPeople}>
