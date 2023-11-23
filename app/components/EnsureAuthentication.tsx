@@ -1,4 +1,3 @@
-'use client'
 import useAuthenticator from '../hook/useAuthticator';
 
 const EnsureAuthentication = () => {

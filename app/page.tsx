@@ -9,18 +9,8 @@ import AttendenceGraph from "./components/AttendenceGarph";
 import UserList from "./components/UserList";
 import EnsureAuthentication from "./components/EnsureAuthentication";
 import NavBar from "./components/NavBar";
-import { useEffect, useState } from "react";
-
 function Home(){
-  const [id,setId] = useState<number>()
-  useEffect(() =>{
-    if (typeof window !== 'undefined') {
-      const storedId = localStorage.getItem('userId');
-      if (storedId) {
-        setId(parseInt(storedId))
-      }
-    }
-  },[])
+
   return (
     <>
       <EnsureAuthentication />
@@ -29,7 +19,8 @@ function Home(){
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>
       </div>
-      <AttendenceGraph id={id!}/>
+      <AttendenceGraph />
+      
 
 
       <div className={styles.currentPeople}>
