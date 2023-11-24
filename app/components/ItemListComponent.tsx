@@ -6,7 +6,10 @@ import { Item } from "../services/itemListService";
 import { CanceledError } from "../services/api-client";
 import ItemCard from "../components/ItemCard"
 import Alert from "./Alert";
-const ItemListComponent = () => {
+interface Props{
+    userId : number
+}
+const ItemListComponent = ({userId} : Props) => {
     const [items,setItems] = useState<Item[]>([]);
     useEffect(() =>{
         let {request,cancel} = itemListService.getAllItems()
@@ -16,15 +19,13 @@ const ItemListComponent = () => {
                        
         }).catch(err =>{
             if (err == CanceledError) return;
-        })
-
-        
+        })    
         return () => cancel();
     },[])
 
     return(
-        <>
-            {items.length == 0 ? <Alert>No Items in List...</Alert> : items.map(item =><ItemCard key={item.id} id={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
+        <> 
+            {items.length == 0 ? <Alert>No Items in List...</Alert> : items.map(item =><ItemCard key={item.id} userId={userId} id={item.id} count={item.id} issuable={item.issuable ? "Yes" : "No"} name={item.name} quantity={item.quantity}/>)}
         </>
 
     )

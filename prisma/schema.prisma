@@ -21,19 +21,20 @@ model User {
   section                String
   user_type              String
 
-  attendance   Attendence[]
-  project      Projects[]
-  issued_items IssuedItems[]
+  attendance          Attendence[]
+  project             Projects[]
+  issued_items        IssuedItems[]
+  issued_item_pending IssuedItemsPending[]
 }
 
 model Attendence {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  state     String   @default("Present")
-  month     String
-  day       Int      
-  year      Int
-  user      User     @relation(fields: [userId], references: [id])
+  id     Int    @id @default(autoincrement())
+  userId Int
+  state  String @default("Present")
+  month  String
+  day    Int
+  year   Int
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Items {
@@ -41,13 +42,15 @@ model Items {
   name     String
   quantity Int
   issuable Boolean
+
+  issued_items_pending IssuedItemsPending[]
 }
 
 model Projects {
   id          Int      @id @default(autoincrement())
   userId      Int
   projectName String
-  date        DateTime
+  date        String
 
   user User @relation(fields: [userId], references: [id])
 }
@@ -58,16 +61,29 @@ model IssuedItems {
   userId       Int
   itemName     String
   quantity     Int
-  dateOfIssue  DateTime
-  dateOfReturn DateTime
+  dateOfIssue  String
+  dateOfReturn String
 
   user User @relation(fields: [userId], references: [id])
+}
+
+model IssuedItemsPending {
+  id           Int      @id @default(autoincrement())
+  itemId       Int
+  userId       Int
+  quantity     Int
+  description  String
+  dateOfReturn String
+  state        String
+
+  user User  @relation(fields: [userId], references: [id])
+  item Items @relation(fields: [itemId], references: [id])
 }
 
 model SpecialEvents {
   id          Int      @id @default(autoincrement())
   name        String
   description String
-  date        DateTime
+  date        String
   location    String
 }

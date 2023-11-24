@@ -4,9 +4,12 @@ import ItemListComponent from "../components/ItemListComponent"
 import EnsureAuthentication from "../components/EnsureAuthentication"
 import NavBar from "../components/NavBar"
 import ItemListAdminOption from "../components/ItemListAdminOption"
+import useAuthenticator from "../hook/useAuthticator"
+import { useEffect } from "react"
 
 function ItemList(){    
-    // Check if sessionStorage is available
+    const {id} = useAuthenticator();
+    useEffect(() =>{},[id])
     const email = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('userEmail') : null;
 
     return (
@@ -38,7 +41,7 @@ function ItemList(){
                     </div>
                 </div>
                 <div className={styles.items}>
-                    <ItemListComponent />
+                    <ItemListComponent userId={id!} />
                 </div>
             </div>
         </>

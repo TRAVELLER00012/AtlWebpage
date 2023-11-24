@@ -1,0 +1,52 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+.content{
+    position: absolute;
+    background-color: rgb(39,44,58);
+    border: 5px solid #00ffa8;
+    width: 50%;
+    height: 55%;
+    top: 25%;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.form form{
+    width: 100%;
+    height: 100%;
+}
+.form form input, .form form textarea{
+    background-color: rgba(25,28,37,1);
+    width: 95%;
+    color: white;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 0;
+    outline: 0;
+    padding: 10px 20px;
+}
+.form form textarea{
+    resize: none;
+    height: 20vh;
+}
+.form .buttons{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 10px;
+}
+.form .buttons button{
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.form .buttons button:nth-child(1){
+    background-color: rgb(84, 147, 247);
+}
+.form .buttons button:nth-child(2){
+    background-color: grey;
+}
