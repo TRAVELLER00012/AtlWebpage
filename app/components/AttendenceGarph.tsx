@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import useAuthenticator from "../hook/useAuthticator";
 import { Line } from 'react-chartjs-2';
@@ -53,10 +54,28 @@ function AttendenceGraph() {
   const { email , id} = useAuthenticator();
   const [presentData,setPresentData] = useState<number[]>([])
   const [absentData,setAbsentData] = useState<number[]>([])
+
   useEffect(() => {
     if (id) {
-      console.log(id);
-      
+      const request = attendenceService.getAttendenceUser(id)
+      request.then(res =>{
+        let data = res.data;
+        const uniqueMonths = Array.from(new Set(data.map((item) => item.month)));
+          
+        uniqueMonths.forEach((month) => {
+          let presentCount = 0;
+          let absentCount = 0;
+          data.forEach((d) => {
+            if (d.month === month) {
+              if (d.state === 'Present') presentCount++;
+              else absentCount++;
+            }
+          });
+          presentData.push(presentCount);
+          absentData.push(absentCount);
+        });
+        setLabels(uniqueMonths)
+      })
     }
   }, [id]);
 

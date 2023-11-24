@@ -4,10 +4,8 @@ import apiClient from "./api-client";
 const DOMAIN = "/attendence/"
 
 export interface AttendenceProps{
-    id : number
+    id? : number
     userId : number
-    firstName : string
-    lastName : string
     state : "Present" | "Absent"
     month : string
     year : number
@@ -27,7 +25,7 @@ class Attendence{
         return apiClient.delete(DOMAIN+id)
     }
     addAttendence(item:AttendenceProps){
-        return apiClient.post(DOMAIN+item)
+        return apiClient.post(DOMAIN,item)
     }
     updateAttendence(item:AttendenceProps){
         return apiClient.patch(DOMAIN+item.id,item)

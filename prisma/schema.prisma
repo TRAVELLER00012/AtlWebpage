@@ -29,8 +29,6 @@ model User {
 model Attendence {
   id        Int      @id @default(autoincrement())
   userId    Int
-  firstName String
-  lastName  String
   state     String   @default("Present")
   month     String
   day       Int      

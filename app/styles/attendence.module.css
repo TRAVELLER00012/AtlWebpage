@@ -1,0 +1,72 @@
+.main{
+    margin-top: 50px;
+}
+.main .insert{
+    background-color: rgb(39,44,58);
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 25px;
+}
+.main .insert{
+    border: 5px solid rgb(84, 147, 247);
+}
+.main div form select{
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    background-color: rgba(25,28,37,1);
+    color: white;
+    margin-bottom: 15px;
+}
+.state{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.state div{
+    background-color: rgba(25,28,37,1);
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+}
+.state div:nth-child(1){
+    background-color: #00ffa8;
+}
+
+.state div:nth-child(2){
+    background-color: tomato;
+}
+.submit{
+    color: black;
+    border: 0;
+    outline: 0;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.insert .submit{
+    background-color: rgb(84, 147, 247);
+}
+.date{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: 10px;
+}
+.date div{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 10px;
+}
+.date div div{
+    background-color: rgba(25,28,37,1);
+    border-radius: 10px;
+    padding: 10px 20px;
+}

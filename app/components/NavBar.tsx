@@ -5,15 +5,28 @@ import MenuImg from "@/public/images/menu.png"
 import styles from "../styles/nav-bar.module.css"
 import NavLogo from "@/public/images/arduino.png"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
+import useAuthenticator from "../hook/useAuthticator"
+import users from "../services/users"
 
 const NavBar = () => {
   const [visible, setVisibility] = useState(false);
+  const [allowMod, setAllowMod] =  useState(false)
   const onMenuClick = () =>{
     setVisibility(!visible)
   }
   const {status,data} = useSession();
+  const {email,id} = useAuthenticator();
+  useEffect(() =>{
+    if(id){
+      const request = users.getUser(id)
+      request.then(res =>{
+        if (res.data.user_type == "Moderator") setAllowMod(true)
+        else setAllowMod(false)
+      })
+    }
+  },[id])
   return (
     <>
       <div className={styles.navbar}>
@@ -23,6 +36,7 @@ const NavBar = () => {
         </div>
         <ul>
               <li><Link href={"."}>Home</Link></li>
+              {allowMod && <li><Link href={"./attendenceAuth"}>Attendence</Link></li>}
               <li><Link href={"./itemlist"}>Item List</Link></li>
               <li><Link href={"./issueitems"}>Issue Items</Link></li>
               <li><Link href={"./paths"}>Paths</Link></li>
