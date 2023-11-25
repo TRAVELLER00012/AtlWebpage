@@ -23,7 +23,7 @@ class IssuedItem{
         return apiClient.get<Item>(DOMAIN+id)
     }
     addIssuedItem(item:Item){
-        return apiClient.post(DOMAIN+item)
+        return apiClient.post(DOMAIN,item)
     }
     deleteIssuedItem(id:number){
         return apiClient.delete(DOMAIN+id)

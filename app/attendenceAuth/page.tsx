@@ -32,7 +32,6 @@ function AttendenceAuth(){
 
     return(
         <>
-            <NavBar />
             <div className={styles.main}>
                 <div className={styles.insert}>
                     <div className={styles.heading} >

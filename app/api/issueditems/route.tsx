@@ -9,8 +9,15 @@ export async function GET(request : NextRequest){
 
 export async function POST(request:NextRequest){
     let body : Item = await request.json();
-    prisma.issuedItems.create({
-        data:body
+    const item = await prisma.issuedItems.create({
+        data:{
+            dateOfIssue: body.dateOfIssue,
+            dateOfReturn : body.dateOfReturn,
+            itemId : body.itemId,
+            itemName : body.itemName,
+            quantity : body.quantity,
+            userId : body.userId
+        }
     })
-    return NextResponse.json({id:body.id})
+    return NextResponse.json({id:item.id})
 }

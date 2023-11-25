@@ -14,7 +14,7 @@ function ItemList(){
 
     return (
         <>
-            <NavBar />
+
             <EnsureAuthentication />
             <div className={styles.main}>
                 <div className={styles.adminOptions}>

@@ -17,7 +17,6 @@ function IssueItems(){
     }, []);
     return (
        <>
-            <NavBar />
             <EnsureAuthentication />
             <div className={styles.main}>
             <div className={styles.itemSelection}>

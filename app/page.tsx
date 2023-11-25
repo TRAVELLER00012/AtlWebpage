@@ -14,7 +14,6 @@ function Home(){
   return (
     <>
       <EnsureAuthentication />
-      <NavBar />
       <div className={styles.headings}>
         <h3>Hi User!</h3>
         <h1>Welcome Home</h1>

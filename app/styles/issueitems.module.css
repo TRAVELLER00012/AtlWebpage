@@ -12,6 +12,7 @@
 }
 .remove{
     color: tomato;
+    cursor: pointer;
 }
 .name{
     cursor: pointer;

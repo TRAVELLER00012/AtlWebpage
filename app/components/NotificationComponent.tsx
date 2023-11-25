@@ -1,0 +1,111 @@
+import { useState } from "react"
+import { CanceledError } from "../services/api-client"
+import pendingService, { Pending } from "../services/pendingService"
+import styles from "../styles/notification.module.css"
+import { NotificationData } from "./NavBar"
+import issuedItemService, { Item } from "../services/issuedItemService"
+import itemListService from "../services/itemListService"
+
+interface Props{
+    data : NotificationData[]
+}
+
+
+const NotificationComponent = ({data} : Props) => {
+    const [itemState,setItemState] = useState(false);
+    const choice = (state : Pending["state"], id : number) => {
+
+        const getPending = pendingService.getItem(id)
+        getPending.then(res=>{
+            let newData : Pending = {
+                id : res.data.id,
+                dateOfReturn: res.data.dateOfReturn,
+                description : res.data.description,
+                itemId: res.data.itemId,
+                quantity : res.data.quantity,
+                userId : res.data.userId,
+                state : state
+            }
+            const updatePending = pendingService.updateItem(id,newData);
+            updatePending.then(res =>setItemState(true))
+            updatePending.catch(err =>{
+                if (err == CanceledError) return;
+            })
+        }).catch(err =>{
+            if (err == CanceledError) return;
+        })
+    }
+    const accept = (id:number) =>{
+        const currentDate = new Date();
+        choice("Accepted",id)
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+        const request = pendingService.getItem(id);
+        request.then(({data}) =>{
+            const itemRequest = itemListService.getItem(data.id)
+            itemRequest.then(itemResponse =>{
+                let newItem : Item = {
+                    id : 0,
+                    dateOfIssue : currentDate.getDate() + " "+months[currentDate.getMonth()]+ " "+ currentDate.getFullYear(),
+                    dateOfReturn : data.dateOfReturn,
+                    itemId : data.itemId,
+                    itemName : itemResponse.data.name,
+                    quantity : data.quantity,
+                    userId : data.userId
+                }
+                issuedItemService.addIssuedItem(newItem).catch(err => {if (err == CanceledError) return;})
+            }).catch(err =>{if (err == CanceledError) return;})
+        }).catch(err =>{if (err == CanceledError) return;})
+    }
+
+    const reject = (id:number) => {
+        choice("Rejected",id)
+    }
+    return (
+        <div className={styles.main}>
+            <div className={styles.heading}>
+                <h1>Notifications</h1>
+            </div>
+            <div className={styles.content} >
+                {data.map((d) =>(
+                    <div className={styles.msg} key={d.id}>
+                        {d.state == "ModReview" && (
+                            <div className={styles.name}>
+                                By: {d.userName}
+                            </div>
+                        )}
+                        <div className={styles.userMsg}>
+                            {d.state == "Pending" && <p>You sent a request to issue a/an <span className={styles.red}>{d.itemName}</span> , quantity: <span className={styles.red}>{d.quantity}</span>; please wait for one of the administrators to accept; you'll see the decision by them here.</p>}
+                            {d.state == "Accepted" && <p>One of our administrators has accepted your request for issue item: <span className={styles.red}>{d.itemName}</span>, quantity: <span className={styles.red}>{d.quantity}</span>. Please make sure to return it as soon as possible.</p>}
+                            {d.state == "Rejected" && <p>One of our administrators has rejected  your request for issue item: <span className={styles.red}>{d.itemName}</span>, quantity: <span className={styles.red}>{d.quantity}</span>.</p>}
+                            {d.state == "ModReview" && <p>One of our student has requested to issue an item..<br/><br/>Item Name: <span className={styles.red}>{d.itemName}</span>, quantity: <span className={styles.red}>{d.quantity}</span><br/><br/>
+                                                            <button className={[styles.pendingButton,styles.accept].join(" ")}
+                                                                    onClick={() => accept(d.id)}
+                                                                    disabled={itemState}
+                                                                    >Accept</button>
+                                                            <button className={[styles.pendingButton,styles.decline].join(" ")} 
+                                                                    onClick={() =>reject(d.id)}
+                                                                    disabled={itemState}>Reject</button>
+                                                        </p>}
+                        
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export default NotificationComponent

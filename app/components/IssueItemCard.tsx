@@ -1,8 +1,6 @@
-'use client'
 import { useState } from "react";
 import styles from "../styles/issueitems.module.css"
 import ExtraIssuedItemInfo from "./ExtraIssuedItemInfo";
-import { set } from "zod";
 interface Props{
     id:number,
     count:number,
@@ -21,7 +19,9 @@ function ItemCard({id,count,name,quantity,issueDate,returnDate}:Props){
                 <div>{quantity}</div>
                 <div>{issueDate}</div>
                 <div>{returnDate}</div>
-                <div className={styles.remove}>Return</div>
+                <div className={styles.remove} onClick={() =>{
+                    
+                }}>Return</div>
             </div>
             {visibile && <ExtraIssuedItemInfo id={id} visibility={setVisibility}/>}    
         </>

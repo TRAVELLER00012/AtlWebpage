@@ -27,7 +27,7 @@ class ItemList{
     addItem(item:Pending){
         return apiClient.post(DOMAIN,item)
     }
-    updateItem(id:Number,item:Pending){
+    updateItem(id:number,item:Pending){
         return apiClient.put(DOMAIN+id,item)
     }
 }
