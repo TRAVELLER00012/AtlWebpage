@@ -20,20 +20,17 @@ const [issuedItem,setIssuedItem] = useState<IssuedItem>();
     useEffect(() =>{
         const issuedReqest=  issuedItemService.getItem(id)
         issuedReqest.then(res =>{
-            setIssuedItem(res.data)
-        })
-        if (issuedItem?.itemId){ 
-            const itemRequest = itemListService.getItem(issuedItem?.itemId)
+            setIssuedItem(res.data) 
+            const itemRequest = itemListService.getItem(res.data.itemId)
             itemRequest.then(res =>{
                 setItem(res.data)
             })
-        }
-        if (issuedItem?.userId){
-            const userRequest = users.getUser(issuedItem?.userId)
+            const userRequest = users.getUser(res.data.userId)
             userRequest.then(res =>{
                 setUser(res.data)
             })
-        }
+        })
+
 
 
     },[])
@@ -67,6 +64,9 @@ const [issuedItem,setIssuedItem] = useState<IssuedItem>();
             <div>
                 <span>Class Section</span>
                 <span>{user?.class}-{user?.section}</span>
+            </div>
+            <div className={styles.removeButton}>
+                <button className={styles.remove}>Return</button>
             </div>
         </div>
     </div>

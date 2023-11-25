@@ -29,3 +29,16 @@
 .close{
     cursor: pointer;
 }
+.remove{
+    color: tomato;
+    cursor: pointer;
+}
+.remove{
+    background-color: rgba(25,28,37,1);
+    border: 0;
+    outline: 0;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    grid-column: span 2;
+}
