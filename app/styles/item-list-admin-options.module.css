@@ -86,3 +86,10 @@
 .editBox{
     border: 5px solid #00ffa8;
 }
+
+@media screen and (max-width: 426px) {
+    .hiddenBox{
+        width: fit-content;
+        right: 0%;
+    }
+}

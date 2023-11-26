@@ -1,5 +1,6 @@
 .extraUserInfo{
     overflow-y: scroll;
+    overflow-x: scroll;
     position: fixed;
     display: grid;
     grid-template-rows: 15% auto auto;
@@ -10,7 +11,13 @@
     border-radius: 10px;
     padding: 15px;
     top: 10%;
-
+    left: 2%;
+    z-index: 100;
+}
+.center{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
 }
 .extraUserInfo .extraUserHeading{
     display: flex;
@@ -72,7 +79,6 @@
 .projectDetails{
     width: 100%;
     height: 100%;
-
 }
 .projectDetails .project{
     display: grid;
@@ -152,4 +158,54 @@
     outline: 0;
     border-radius: 10px;
     cursor: pointer;
+}
+.userIcon{
+    display: block;
+}
+@media screen and (max-width: 768px) {
+    .userIcon{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:426px) {
+    .smallHeading{
+        display: block;
+    }
+    .content .data div{
+        grid-template-columns: auto;
+        row-gap: 10px;
+        grid-template-rows: auto auto;
+    }
+    .showAdd,.showDelete,.showEdit{
+        right: auto;
+        width: fit-content;
+        height: fit-content;
+    }
+    .projectDetails{
+        margin-top: 20px;
+    }
+    .extraUserHeading{
+        margin-top: auto;
+    }
+    .heading{
+        display: block;
+    }
+    .buttonGroup{
+        justify-items: left;
+        justify-content: left;
+    }
+    .extraUserInfo{
+        width: fit-content;
+        left: 2%;
+    }
+    .content{
+        margin-top: 25%;
+    }
+}
+@media screen and (max-width : 320px) {
+    .content{
+        margin-top: 35%;
+    }
 }

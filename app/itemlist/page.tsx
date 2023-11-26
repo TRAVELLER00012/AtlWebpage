@@ -3,9 +3,7 @@ import styles from "../styles/item-list.module.css"
 import ItemListComponent from "../components/ItemListComponent"
 import EnsureAuthentication from "../components/EnsureAuthentication"
 import ItemListAdminOption from "../components/ItemListAdminOption"
-
 import { useEffect, useState } from "react"
-import users from "../services/users"
 
 function ItemList(){    
     const [email,setEmail] = useState<string>()
@@ -43,11 +41,11 @@ function ItemList(){
                         Name
                     </div>
                     
-                    <div className="quantity">
+                    <div className={styles.quantity}>
                         Quantity
                     </div>
                     
-                    <div className="issuable">
+                    <div className={styles.issuable}>
                         Issuable
                     </div>
                 </div>

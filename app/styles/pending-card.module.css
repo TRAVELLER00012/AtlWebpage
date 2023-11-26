@@ -6,7 +6,7 @@
     position: absolute;
     background-color: rgb(39,44,58);
     border: 5px solid #00ffa8;
-    width: 50%;
+    width: fit-content;
     height: 55%;
     top: 25%;
     border-radius: 10px;
@@ -14,7 +14,7 @@
 }
 
 .form form{
-    width: 100%;
+    width: 95%;
     height: 100%;
 }
 .form form input, .form form textarea{

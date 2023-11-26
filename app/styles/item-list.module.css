@@ -35,6 +35,7 @@
 }
 .name{
     cursor: pointer;
+    overflow-x: scroll;
 }
 .adminOptions{
     display: flex;
@@ -46,3 +47,14 @@
         font-size: 0.75rem;
     }
 }
+@media screen and (max-width: 426px) {
+    .quantity,.issuable{
+        display: none;
+    }
+    .itemSelection, .items .parentItem{
+        display: grid;
+        grid-template-columns: 50% auto;
+        column-gap: 10px;
+    }
+}
+

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import useAuthenticator from "../hook/useAuthticator";
 import { Line } from 'react-chartjs-2';
@@ -104,7 +103,9 @@ function AttendenceGraph() {
 
   return(
     <>
-      <Line options={options} data={data} />
+      <div>
+        <Line options={options} data={data} />
+      </div>
     </>
   )
 }

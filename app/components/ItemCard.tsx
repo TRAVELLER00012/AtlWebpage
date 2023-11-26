@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/item-list.module.css"
 import ExtraItemInfo from "./ExtraItemInfo";
 import PendingCard from "./PendingCard";
@@ -11,7 +11,7 @@ interface Props{
     issuable:"Yes"|"No",
 }
 function ItemCard({id,count,issuable,name,quantity,userId}:Props){
-    const [cardVibility, setCardVibility] = useState(false)
+    const [cardVisility, setCardVisibility] = useState(false)
     const [isIssued, setIsIssued] = useState(false)
     const [visible,setVisibility] = useState(false)
 
@@ -20,21 +20,21 @@ function ItemCard({id,count,issuable,name,quantity,userId}:Props){
             <div className={[styles.parentItem,styles.itemCard].join(" ")}>
                 <div>{count}</div>
                 <div className={styles.name} onClick={() => {setVisibility(!visible)}}>{name}</div>
-                <div>{quantity}</div>
+                <div className={styles.quantity}>{quantity}</div>
                 <div onClick={() =>{
                         if(issuable == "Yes"){
-                            setCardVibility(!cardVibility)
+                            setCardVisibility(!cardVisility)
                         }
                     }
-                }>
+                } className={styles.issuable}>
                     {issuable}
                     {isIssued && <p className={styles.issued}>Pending</p>}
                 </div>
             </div>
-            {visible && <ExtraItemInfo id={id} visibility={setVisibility} />}
-            {(cardVibility && !isIssued) && <PendingCard  max={quantity} userId={userId} itemId={id} cancel={() => setCardVibility(false)} submit={() => {
+            {visible && <ExtraItemInfo id={id} visibility={setVisibility} setCardVisibility={setCardVisibility}/>}
+            {(cardVisility && !isIssued) && <PendingCard  max={quantity} userId={userId} itemId={id} cancel={() => setCardVisibility(false)} submit={() => {
                 setIsIssued(true)
-                setCardVibility(false)
+                setCardVisibility(false)
             }}/>}
         </>    
     )

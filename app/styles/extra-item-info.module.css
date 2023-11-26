@@ -8,6 +8,7 @@
     border: 5px solid #00ffa8;
     border-radius: 10px;
     padding: 15px;
+    left: 1%;
     top: 10%;
 }
 .redBorder{
@@ -49,4 +50,21 @@
 }
 .close{
     cursor: pointer;
+}
+.heading{
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+@media screen and (max-width: 426px) {
+    .data div{
+        grid-template-columns: auto;
+        grid-template-rows: 50% auto;
+        row-gap: 5px;
+    }
+}
+@media screen and (max-width: 321px) {
+    .extraInfo{
+        left: 0;
+        width: 85%;
+    }
 }

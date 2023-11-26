@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { CanceledError } from "../services/api-client"
 import pendingService, { Pending } from "../services/pendingService"
 import styles from "../styles/notification.module.css"
@@ -8,11 +8,12 @@ import itemListService from "../services/itemListService"
 import notificationService from "../services/notificationService"
 
 interface Props{
-    data : NotificationData[]
+    data : NotificationData[],
+    setVisbility: (val : boolean) => void
 }
 
 
-const NotificationComponent = ({data} : Props) => {
+const NotificationComponent = ({data,setVisbility} : Props) => {
     const [itemState,setItemState] = useState(false);
     const [returnState, setReturnState] = useState(false)
     const choice = (state : Pending["state"], id : number) => {
@@ -114,7 +115,7 @@ const NotificationComponent = ({data} : Props) => {
     return (
         <div className={styles.main}>
             <div className={styles.heading}>
-                <h1>Notifications</h1>
+                <h1 onClick={() => setVisbility(false)}>Notifications</h1>
             </div>
             <div className={styles.content} >
                 {data.map((d) =>(

@@ -60,7 +60,7 @@ function AttendenceAuth(){
                                 ))}
                             </select>
                             <div className={styles.date}>
-                                <div>
+                                <div className={styles.dataEntry}>
                                     <div>
                                         Date
                                     </div>
@@ -68,15 +68,15 @@ function AttendenceAuth(){
                                         {currentDate.getDay()}
                                     </div>
                                 </div>
-                                <div>
+                                <div className={styles.dataEntry}>
                                     <div>Month</div>
                                     <div>{months[currentDate.getMonth()]}</div>
                                 </div>
-                                <div>
+                                <div className={styles.dataEntry}>
                                     <div>Year</div>
                                     <div>{currentDate.getFullYear()}</div>
                                 </div>
-                                <div>
+                                <div className={styles.dataEntry}>
                                     <div>Present / Absent</div>
                                     <div>{presentSelected ? "Present" : "Absent"}</div>
                                 </div>

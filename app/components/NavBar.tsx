@@ -150,15 +150,17 @@ const NavBar = () => {
         <div className={styles.mobileNav}>
           <ul>
                 <li><Link href={"."}>Home</Link></li>
+                {allowMod && <li><Link href={"./attendenceAuth"}>Attendence</Link></li>}
                 <li><Link href={"./itemlist"}>Item List</Link></li>
                 <li><Link href={"./issueitems"}>Issue Items</Link></li>
                 <li><Link href={"./paths"}>Paths</Link></li>
                 <li>Profile</li>
+                {visible && <li onClick={() => setShowNotification(!showNotification)}>Notifications</li>}
                 {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
           </ul>
         </div>
       </div>
-      {showNotification && <NotificationComponent data={notificationData} />}
+      {showNotification && <NotificationComponent data={notificationData} setVisbility={setShowNotification }/>}
     </>
 
   )

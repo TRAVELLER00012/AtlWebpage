@@ -47,7 +47,7 @@
     margin-top: 25px;
     justify-content: center;
     text-align: center;
-    background-color: #413d73;
+    background-color: rgb(39,44,58);
     border-radius: 10px;
 }
 .mobileNav ul{
@@ -64,12 +64,10 @@
 .notification{
     cursor: pointer;
 }
-@media screen and (min-width: 635px) {
+@media screen and (max-width: 768px) {
     .mobileNav{
-        display: none;
+        display: flex;
     }
-}
-@media screen and (max-width: 635px) {
     .items{
         display: grid;
     }
@@ -78,5 +76,8 @@
     }
     .menu{
         display: block;
+    }
+    .notification{
+        display: none;
     }
 }
