@@ -36,7 +36,7 @@ function ItemCard({id,count,name,quantity,issueDate,returnDate,email}:Props){
                 })
             })
         })
-    })
+    },[])
     return (
         <>
             <div className={[styles.itemSelection,styles.items].join(" ")}>

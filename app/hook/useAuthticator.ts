@@ -22,7 +22,10 @@ export default function useAuthenticator(): UseAuthenticatorResult {
           const {request} = users.getAllUser();
           request.then(res =>{
             res.data.map(d =>{
-              if (d.email === email) setId(d.id)
+              if (d.email === email) {
+                setId(d.id)
+                sessionStorage.setItem('userId',d.id.toString())
+              }
             })
           })
           sessionStorage.setItem('userEmail', userEmail);

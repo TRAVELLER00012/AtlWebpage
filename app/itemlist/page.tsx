@@ -2,15 +2,26 @@
 import styles from "../styles/item-list.module.css"
 import ItemListComponent from "../components/ItemListComponent"
 import EnsureAuthentication from "../components/EnsureAuthentication"
-import NavBar from "../components/NavBar"
 import ItemListAdminOption from "../components/ItemListAdminOption"
-import useAuthenticator from "../hook/useAuthticator"
-import { useEffect } from "react"
+
+import { useEffect, useState } from "react"
+import users from "../services/users"
 
 function ItemList(){    
-    const {id} = useAuthenticator();
-    useEffect(() =>{},[id])
-    const email = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('userEmail') : null;
+    const [email,setEmail] = useState<string>()
+    const [id,setId] = useState<number>()
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const storedEmail = sessionStorage.getItem('userEmail');
+        const userID = sessionStorage.getItem('userId')
+        if (storedEmail) {
+            setEmail(storedEmail)
+        }
+        if (userID){
+            setId(parseInt(userID))
+        }
+      }
+    }, []);
 
     return (
         <>
@@ -41,7 +52,7 @@ function ItemList(){
                     </div>
                 </div>
                 <div className={styles.items}>
-                    <ItemListComponent userId={id!} />
+                    {id && <ItemListComponent userId={id} />}
                 </div>
             </div>
         </>
