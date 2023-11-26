@@ -15,7 +15,6 @@ const ExtraItemInfo = ({id,visibility}:Props) => {
     const request = itemListService.getItem(id)
     request.then(res => {
       setItemData(res.data)
-      console.log(res.data);
     })
   },[])
   return (

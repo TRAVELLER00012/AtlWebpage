@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CanceledError } from "../services/api-client"
 import pendingService, { Pending } from "../services/pendingService"
 import styles from "../styles/notification.module.css"
 import { NotificationData } from "./NavBar"
 import issuedItemService, { Item } from "../services/issuedItemService"
 import itemListService from "../services/itemListService"
+import notificationService from "../services/notificationService"
 
 interface Props{
     data : NotificationData[]
@@ -13,6 +14,7 @@ interface Props{
 
 const NotificationComponent = ({data} : Props) => {
     const [itemState,setItemState] = useState(false);
+    const [returnState, setReturnState] = useState(false)
     const choice = (state : Pending["state"], id : number) => {
 
         const getPending = pendingService.getItem(id)
@@ -27,17 +29,20 @@ const NotificationComponent = ({data} : Props) => {
                 state : state
             }
             const updatePending = pendingService.updateItem(id,newData);
-            updatePending.then(res =>setItemState(true))
+            updatePending.then(res =>{
+                setItemState(true)
+                window.location.reload();
+            })
             updatePending.catch(err =>{
                 if (err == CanceledError) return;
             })
+            
         }).catch(err =>{
             if (err == CanceledError) return;
         })
     }
     const accept = (id:number) =>{
         const currentDate = new Date();
-        choice("Accepted",id)
         const months = [
             "January",
             "February",
@@ -65,13 +70,46 @@ const NotificationComponent = ({data} : Props) => {
                     quantity : data.quantity,
                     userId : data.userId
                 }
+                
                 issuedItemService.addIssuedItem(newItem).catch(err => {if (err == CanceledError) return;})
+                itemListService.updateItem(data.id,{
+                    id:data.id,
+                    issuable : itemResponse.data.issuable,
+                    name : itemResponse.data.name,
+                    quantity : itemResponse.data.quantity - data.quantity
+                })
+                choice("Accepted",id)
             }).catch(err =>{if (err == CanceledError) return;})
         }).catch(err =>{if (err == CanceledError) return;})
+        
     }
 
     const reject = (id:number) => {
         choice("Rejected",id)
+    }
+    const returnItem = (id : number, index : number | undefined) =>{
+        const issuedItem = issuedItemService.getItem(id)
+        issuedItem.then(issuedRes =>{
+            const item = itemListService.getItem(issuedRes.data.itemId)
+            item.then(itemRes =>{
+                const updateItem = itemListService.updateItem(itemRes.data.id,{
+                    id: itemRes.data.id,
+                    issuable : itemRes.data.issuable,
+                    name : itemRes.data.name,
+                    quantity : itemRes.data.quantity + issuedRes.data.quantity
+                })
+                const deleteIsseudItem = issuedItemService.deleteIssuedItem(id)
+                deleteIsseudItem.then(res =>{
+                    window.location.reload()
+                }).catch(err =>{if (err == CanceledError) return;})
+            }).catch(err =>{if (err == CanceledError) return;})
+        }).catch(err =>{if (err == CanceledError) return;})
+        
+        
+        if (index)
+            notificationService.deleteNotification(index)
+        
+
     }
     return (
         <div className={styles.main}>
@@ -99,7 +137,13 @@ const NotificationComponent = ({data} : Props) => {
                                                                     onClick={() =>reject(d.id)}
                                                                     disabled={itemState}>Reject</button>
                                                         </p>}
-                        
+                            {d.state == "Return" && <p>
+                                                        {d.description}
+                                                        <br />
+                                                        <button className={[styles.pendingButton,styles.accept].join(" ")} 
+                                                                onClick={() => returnItem(d.id,data[data.indexOf(d)].otherID)}
+                                                                disabled={returnState}>Click if Student has Returned Item</button>
+                                                    </p>}
                         </div>
                     </div>
                 ))}

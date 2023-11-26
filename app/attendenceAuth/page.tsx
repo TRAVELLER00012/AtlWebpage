@@ -5,13 +5,14 @@ import styles from "../styles/attendence.module.css"
 import users from "../services/users";
 import { CanceledError } from "../services/api-client";
 import attendenceService, { AttendenceProps } from "../services/attendenceService";
+export const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
 function AttendenceAuth(){
     const [user,setUser] = useState<{id:number; firstName:string; lastName:string}[]>()
     const [presentSelected,setPresentSelect] = useState(true)
-    const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ];
+
     const specialMonths = ["January", "March", "May", "July", "August", "October", "December"];
     let currentDate = new Date();
 

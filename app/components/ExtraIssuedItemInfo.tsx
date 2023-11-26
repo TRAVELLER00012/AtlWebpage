@@ -1,4 +1,3 @@
-'use client'
 import { useEffect, useState } from 'react'
 import styles from '../styles/extra-issused-items.module.css'
 import issuedItemService, { Item as IssuedItem} from '../services/issuedItemService'

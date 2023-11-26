@@ -37,7 +37,7 @@ const IssueItemList = ({email} : Props) => {
         <>
             {items.length == 0 ? <Alert>No items Issued yet</Alert> :             
             items.map(item =>(
-                <IssueItemCard key={item.id} id={item.id} count={item.id} issueDate={item.dateOfIssue} name={item.itemName} quantity={item.quantity} returnDate={item.dateOfReturn}/>
+                <IssueItemCard key={item.id} id={item.id} count={item.id} email={email} issueDate={item.dateOfIssue} name={item.itemName} quantity={item.quantity} returnDate={item.dateOfReturn}/>
             ))}
         </>
     )

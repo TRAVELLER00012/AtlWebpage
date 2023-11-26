@@ -13,18 +13,21 @@ import NotificationComponent from "./NotificationComponent"
 import pendingService from "../services/pendingService"
 import itemListService from "../services/itemListService"
 import { CanceledError } from "../services/api-client"
+import notificationService from "../services/notificationService"
 export interface NotificationData {
   id : number,
-  userName : string,
-  itemName : string,
-  quantity : number,
-  state : "Pending" | "Accepted" | "Rejected" | "ModReview"
+  otherID? : number,
+  userName?: string,
+  itemName? : string,
+  quantity? : number,
+  description?:string,
+  state : "Pending" | "Accepted" | "Rejected" | "ModReview" | "Return"
 }
 const NavBar = () => {
   const [visible, setVisibility] = useState(false);
   const [allowMod, setAllowMod] =  useState(false)
   const [showNotification,setShowNotification] = useState(false)
-  const [notificationData, setNotificationData] = useState<NotificationData[]>();
+  const [notificationData, setNotificationData] = useState<NotificationData[]>([]);
 
   const onMenuClick = () =>{
     setVisibility(!visible)
@@ -35,10 +38,13 @@ const NavBar = () => {
   useEffect(() =>{
     if(id){
       const request = users.getUser(id)
+      const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
+
       request.then(res =>{
         if (res.data.user_type == "Moderator") setAllowMod(true)
         else setAllowMod(false)
       })
+      let temp : NotificationData[] = []
       const {request : pendingRequest,cancel} = pendingService.getAllItems();
       pendingRequest.then(res =>{
         res.data.map(d =>{
@@ -58,12 +64,12 @@ const NavBar = () => {
               finalData.state = d.state;
               item.then(i => {
                 finalData.itemName = i.data.name
-                if (notificationData) setNotificationData([...notificationData,finalData])
-                else setNotificationData([finalData])
-  
+                temp.push(finalData)
               }).catch(err => {if (err == CanceledError) return;})
             })
             .catch(err => {if(err == CanceledError) return;})  
+
+
           }else{
             request.then(res =>{
               if (res.data.user_type == "Moderator" && d.state == "Pending"){
@@ -83,20 +89,43 @@ const NavBar = () => {
                   userReq.then(userRes =>{
                     finalData.userName = userRes.data.firstName + " " + userRes.data.lastName
                     finalData.id = d.id
-                    if (notificationData) setNotificationData([...notificationData,finalData])
-                    else setNotificationData([finalData])
+                    temp.push(finalData)
                   })
-
-                  })
-
-  
+                  }).catch(err => {if (err == CanceledError) return;})
               }
             })
           }
-        })
+        })}).catch(err => {if (err == CanceledError) return;})
+      const user = users.getUser(id)
+      user.then(userRes =>{
+          notificationRequest.then(res =>{
+            res.data.map(d =>{
+              if (d.access == "Moderators"){
+                let newData : NotificationData = {
+                  id : d.issuedItemId,
+                  state : d.notificationType,
+                  description : d.description,
+                  otherID: d.id
+                }
+                if (userRes.data.user_type == "Moderator"){
+                  temp.push(newData)
+                  setNotificationData(temp)
+                }else{
+                  setNotificationData(temp)
+                }
+              }
+            })
+            setNotificationData(temp)
+          }).catch(err => {if (err == CanceledError) return;})
+        
+          
       })
-      return () => cancel();
+      return () => {
+        cancel()
+      }
     }
+    
+    
   },[id])
   return (
     <>
@@ -129,7 +158,7 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      {(showNotification && notificationData) && <NotificationComponent data={notificationData} />}
+      {showNotification && <NotificationComponent data={notificationData} />}
     </>
 
   )
