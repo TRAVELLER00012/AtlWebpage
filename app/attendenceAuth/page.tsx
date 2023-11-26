@@ -54,6 +54,7 @@ function AttendenceAuth(){
                             }
                         }}>
                             <select id="user" ref={userInsertSelect}>
+                                <option key={""} value={""} disabled selected></option>
                                 {user?.map(u =>(
                                    <option key={u.id} value={u.id}>{u.firstName} {u.lastName}</option> 
                                 ))}

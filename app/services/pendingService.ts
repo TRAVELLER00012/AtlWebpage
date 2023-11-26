@@ -12,7 +12,7 @@ export interface Pending{
     state : "Accepted" | "Rejected" | "Pending"
 }
 
-class ItemList{
+class Pendings{
     getAllItems(){
         const controller = new AbortController();
         const request = apiClient.get<Pending[]>(DOMAIN,{signal:controller.signal})
@@ -32,4 +32,4 @@ class ItemList{
     }
 }
 
-export default new ItemList();
+export default new Pendings();

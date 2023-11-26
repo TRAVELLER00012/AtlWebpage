@@ -1,7 +1,8 @@
 .extraUserInfo{
+    overflow-y: scroll;
     position: fixed;
     display: grid;
-    grid-template-rows: 15% auto;
+    grid-template-rows: 15% auto auto;
     width: 90%;
     height: 70%;
     background-color: rgb(39,44,58);
@@ -11,7 +12,7 @@
     top: 10%;
 
 }
-.extraUserInfo .heading{
+.extraUserInfo .extraUserHeading{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,7 +23,7 @@
     color: tomato;
 
 }
-.extraUserInfo .heading .close{
+.extraUserInfo  .close{
     margin-bottom: 10px;
     cursor: pointer;
 }
@@ -33,7 +34,8 @@
     align-items: center;
     column-gap: 50px;
 }
-.extraUserInfo .heading h1{
+
+.extraUserInfo .extraUserHeading h1{
     font-size: 3rem;
     margin-top: 10px;
 }
@@ -47,4 +49,107 @@
     padding: 10px 20px;
     border-radius: 10px;
     background-color: rgba(25,28,37,1);
+}
+.buttonGroup{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 10px;
+}
+.editInfoButtons img{
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.editInfoButtons img:nth-child(1){
+    background-color: #00ffa8;
+}
+.editInfoButtons img:nth-child(2){
+    background-color: dodgerblue;
+}
+.editInfoButtons img:nth-child(3){
+    background-color: tomato;
+}
+.projectDetails{
+    width: 100%;
+    height: 100%;
+
+}
+.projectDetails .project{
+    display: grid;
+    grid-template-rows: 25% 50% 25%;
+    row-gap: 10px;
+    margin-bottom: 100px;
+}
+.projectDetails .project div{
+    background-color: rgba(25,28,37,1);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.projectDetails .project div:nth-child(1),.project div:nth-child(3){
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.project div:nth-child(2){
+    word-break: break-all;
+    overflow-y: scroll;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hidden{
+    display: none;
+}
+.showAdd{
+    border: 5px solid rgb(84, 147, 247);
+}
+.showDelete{
+    border: 5px solid tomato;
+}
+.showEdit{
+    border: 5px solid #00ffa8;
+}
+.showAdd,.showDelete,.showEdit{
+    position: absolute;
+    right: 1%;
+    z-index:10;
+    width: 40%;
+    height: 45vh;
+    background-color: rgba(25,28,37,1);
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.form form .formMain{
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    row-gap: 10px;
+}
+.form form input, .form form textarea, .form form select{
+    color: white;
+    padding: 10px 20px;
+    background-color: rgb(39,44,58);
+    border: 0;
+    outline: 0;
+    border-radius: 10px;
+    resize: none;
+}
+.buttons{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 10px;
+}
+.buttons button[type="reset"]{
+    background-color: grey;
+}
+.buttons button[type="submit"]{
+    background-color: #00ffa8;
+}
+.buttons button{
+    padding: 10px 20px;
+    border-bottom: 10px;
+    border: 0;
+    outline: 0;
+    border-radius: 10px;
+    cursor: pointer;
 }

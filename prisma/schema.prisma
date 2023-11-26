@@ -47,16 +47,17 @@ model Items {
 }
 
 model Projects {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   userId      Int
   projectName String
+  description String
   date        String
 
   user User @relation(fields: [userId], references: [id])
 }
 
 model IssuedItems {
-  id           Int     @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   itemId       Int
   userId       Int
   itemName     String
@@ -68,7 +69,7 @@ model IssuedItems {
 }
 
 model IssuedItemsPending {
-  id           Int      @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   itemId       Int
   userId       Int
   quantity     Int
@@ -80,17 +81,16 @@ model IssuedItemsPending {
   item Items @relation(fields: [itemId], references: [id])
 }
 
-model Notification{
-  id Int @id @default(autoincrement())
-  issuedItemId Int?
-  access String
+model Notification {
+  id               Int    @id @default(autoincrement())
+  issuedItemId     Int?
+  access           String
   notificationType String
-  description String
-
+  description      String
 }
 
 model SpecialEvents {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   description String
   date        String

@@ -5,12 +5,12 @@ const DOMAIN = "/notification/"
 export let notifications = ["Return"]
 export interface Notification{
     id : number,
-    issuedItemId : number,
+    issuedItemId : number
     description : string
     access : "All" | "Moderators"
     notificationType : "Return"
 }
-class ItemList{
+class Notifications{
     getAllNotifications(){
         const controller = new AbortController();
         const request = apiClient.get<Notification[]>(DOMAIN,{signal:controller.signal})
@@ -30,4 +30,4 @@ class ItemList{
     }
 }
 
-export default new ItemList();
+export default new Notifications();
