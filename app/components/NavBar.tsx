@@ -167,7 +167,7 @@ const NavBar = () => {
                 <li><Link href={"./issueitems"}>Issue Items</Link></li>
                 <li><Link href={"./paths"}>Paths</Link></li>
                 <li><Link href={"./profile"}>Profile</Link></li>
-                {visible && <li onClick={() => setShowNotification(!showNotification)}>Notifications</li>}
+                <li onClick={() => setShowNotification(!showNotification)}>Notifications</li>
                 {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
           </ul>
         </div>
