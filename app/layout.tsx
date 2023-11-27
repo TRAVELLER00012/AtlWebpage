@@ -3,8 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import AuthProvider from './auth/Provider'
 import NavBar from './components/NavBar'
-import users from './services/users'
-import { CanceledError } from './services/api-client'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +14,10 @@ export const metadata: Metadata = {
 export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en">
+      <head>
+        <title>ATL Webpage</title>
+        <link rel="icon" href="/images/monitor.png" />
+      </head>
       <body className={inter.className}>
           <AuthProvider>
             <NavBar/>
