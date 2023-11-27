@@ -37,15 +37,15 @@ const NavBar = () => {
   const {email,id} = useAuthenticator();
   const currentDate = new Date();
   useEffect(() =>{
+    console.log(id);
+    
     if(id){
       const request = users.getUser(id)
-      const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
-
       request.then(res =>{
         if (res.data.user_type == "Moderator") setAllowMod(true)
         else setAllowMod(false)
-        
-      })
+      }).catch(err =>{if(err == CanceledError) return;})
+      const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
 
 
       let temp : NotificationData[] = []
