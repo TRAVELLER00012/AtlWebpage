@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
-import NavBar from "../components/NavBar";
 import styles from "../styles/attendence.module.css"
 import users from "../services/users";
 import { CanceledError } from "../services/api-client";
 import attendenceService, { AttendenceProps } from "../services/attendenceService";
+import LoadingCircle from "../components/LoadingCircle";
 let months : string[] = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -13,6 +13,7 @@ let months : string[] = [
 function AttendenceAuth(){
     const [user,setUser] = useState<{id:number; firstName:string; lastName:string}[]>()
     const [presentSelected,setPresentSelect] = useState(true)
+    const [loading,setLoading] = useState(false)
     let currentDate = new Date();
     const userInsertSelect = useRef<HTMLSelectElement>(null);
 
@@ -31,11 +32,13 @@ function AttendenceAuth(){
             <div className={styles.main}>
                 <div className={styles.insert}>
                     <div className={styles.heading} >
-                        <h1>Insert</h1>
+                        <h1>Insert</h1> 
+                        {loading && <LoadingCircle />}
                     </div>
                     <div className={styles.content}>
                         <form onSubmit={(event) =>{
                             event.preventDefault()
+                            setLoading(true)
                             if (userInsertSelect.current){
                                 const newData : AttendenceProps = {
                                     userId : parseInt(userInsertSelect.current.value),
@@ -44,7 +47,9 @@ function AttendenceAuth(){
                                     year : currentDate.getFullYear(),
                                     state : presentSelected ? "Present" : "Absent"
                                 }
-                                attendenceService.addAttendence(newData)
+                                attendenceService.addAttendence(newData).finally(() =>{
+                                    setLoading(false)
+                                })
 
                             }
                         }}>

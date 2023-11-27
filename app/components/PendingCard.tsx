@@ -1,9 +1,10 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import pendingService from "../services/pendingService"
 import styles from "../styles/pending-card.module.css"
 import users from "../services/users"
 import issuedItemService from "../services/issuedItemService"
 import itemListService from "../services/itemListService"
+import LoadingCircle from "./LoadingCircle"
 interface Props{
     max : number,
     itemId : number,
@@ -19,14 +20,19 @@ const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
     const quantity = useRef<HTMLInputElement>(null);
     const description = useRef<HTMLTextAreaElement>(null);
     const date = useRef<HTMLInputElement>(null);
+    const [loading,setLoading] = useState(false);
   return (
     <div className={styles.main}>
         <div className={styles.content}>
             <div className={styles.heading}>
-                <h1>Information</h1>
+                <div>
+                    <h1>Information</h1>
+                    {loading && <LoadingCircle />}
+                </div>
             </div>
             <div className={styles.form}>
-                <form onSubmit={(event) =>{                    
+                <form onSubmit={(event) =>{      
+                    setLoading(true)              
                     event.preventDefault()
                         const userRequet = users.getUser(userId)
                         userRequet.then(res =>{
@@ -34,8 +40,6 @@ const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
                             if (res.data.user_type == "Moderator"){
 
                                     const currentDate = new Date()
-    
-
                                     item.then(res =>{
                                         if (quantity.current && description.current && date.current){
                                             issuedItemService.addIssuedItem({
@@ -46,12 +50,16 @@ const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
                                                 quantity: parseInt(quantity.current.value),
                                                 itemName : res.data.name,
                                                 userId : userId
-                                            })
-                                            const updateItem = itemListService.updateItem(itemId,{
-                                                id : itemId,
-                                                issuable : res.data.issuable,
-                                                name : res.data.name,
-                                                quantity : res.data.quantity - parseInt(quantity.current.value)
+                                            }).then(() =>{
+                                                const updateItem = itemListService.updateItem(itemId,{
+                                                    id : itemId,
+                                                    issuable : res.data.issuable,
+                                                    name : res.data.name,
+                                                    quantity : res.data.quantity - parseInt(quantity.current!.value)
+                                                }).then(() =>{
+                                                    setLoading(false)
+                                                    window.location.reload()
+                                                })
                                             })
                                         }
                                     })
@@ -69,6 +77,9 @@ const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
                                             quantity : parseInt(quantity.current.value),
                                             state : "Pending",
                                             userId : userId
+                                        }).then(() =>{
+                                            setLoading(false)
+                                            window.location.reload();
                                         })
 
                                     }
@@ -84,8 +95,8 @@ const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
                     <textarea placeholder="Description" maxLength={255} ref={description}/>
                     <input type="date" ref={date}/>
                     <div className={styles.buttons}>
-                        <button type="submit">Submit</button>
-                        <button type="reset" onClick={() => cancel()} >Cancel</button>
+                        <button type="submit" disabled={loading}>Submit</button>
+                        <button type="reset" onClick={() => cancel()}  disabled={loading}>Cancel</button>
                     </div>
                 </form>
             </div>

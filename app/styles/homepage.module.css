@@ -10,6 +10,10 @@
 .currentPeople{
     margin-top: 100px;
 }
+.currentPeople .mainHeading{
+    display: flex;
+    align-items: center;
+}
 .users{
     display: flex;
     overflow-x: scroll;

@@ -6,15 +6,17 @@ import itemListService from '../services/itemListService'
 import users, { User } from '../services/users'
 import Image from 'next/image'
 import CloseIcon from "@/public/images/close.png"
+import LoadingCircle from './LoadingCircle'
 
 interface Props{
     id : number,
     visibility : (val : boolean) => void
-    returnFun : () => void
+    returnFun : () => void,
+    loading: boolean
 }
 
-const ExtraIssuedItemInfo = ({id,visibility,returnFun} : Props) => {
-const [issuedItem,setIssuedItem] = useState<IssuedItem>();
+const ExtraIssuedItemInfo = ({id,visibility,returnFun, loading} : Props) => {
+    const [issuedItem,setIssuedItem] = useState<IssuedItem>();
     const [item,setItem] = useState<Item>();
     const [user,setUser] = useState<User>();
     useEffect(() =>{
@@ -37,7 +39,10 @@ const [issuedItem,setIssuedItem] = useState<IssuedItem>();
   return (
     <div className={styles.extraInfo}>
         <div className={styles.heading}>
-            <h1>{item?.name}</h1>
+            <div>
+                <h1>{item?.name}</h1>
+                {loading && <LoadingCircle />}
+            </div>
             <Image src={CloseIcon} alt="Close icon" className={styles.close} onClick={() => visibility(false)}/>
         </div>
         <div className={styles.content}>

@@ -5,6 +5,7 @@ import notificationService from "../services/notificationService";
 import issuedItemService from "../services/issuedItemService";
 import users from "../services/users";
 import itemListService from "../services/itemListService";
+import LoadingCircle from "./LoadingCircle";
 interface Props{
     id:number,
     count:number,
@@ -16,6 +17,7 @@ interface Props{
 }
 function ItemCard({id,count,name,quantity,issueDate,returnDate,email}:Props){
     const [visibile, setVisibility] = useState(false)
+    const [loading,setLoading] = useState(false)
     interface ItemInfo {name : string,itemName:string, quantity: number}
     const [itemInfo,setItemInfo] = useState<ItemInfo>()
     useEffect(() =>{
@@ -36,11 +38,24 @@ function ItemCard({id,count,name,quantity,issueDate,returnDate,email}:Props){
                 })
             })
         })
+
+        const {request: notificationRequest ,cancel} = notificationService.getAllNotifications();
+        notificationRequest.then((res) =>{
+            res.data.map(d =>{
+                if (d.issuedItemId === id){
+                    
+                }
+            })
+        })
+        return () =>{
+            cancel();
+        }
     },[])
 
     const returnFunction = () =>{
         const {request,cancel} = users.getAllUser();
-        request.then(res =>{    
+        request.then(res =>{ 
+            setLoading(true)   
             res.data.map(d =>{
                 if (d.email == email && d.user_type == "Moderator"){
                     const issuedItem = issuedItemService.getItem(id)
@@ -74,11 +89,13 @@ function ItemCard({id,count,name,quantity,issueDate,returnDate,email}:Props){
                     return;
                 }
             })
+            setLoading(false)
         })
     }
 
     return (
         <>
+            {loading && <LoadingCircle />}
             <div className={[styles.itemSelection,styles.items].join(" ")}>
                 <div>{count}</div>
                 <div onClick={() => setVisibility(!visibile)} className={styles.name}>{name}</div>
@@ -87,7 +104,7 @@ function ItemCard({id,count,name,quantity,issueDate,returnDate,email}:Props){
                 <div className={styles.returnDate}>{returnDate}</div>
                 <div className={styles.remove} onClick={() => returnFunction()}>Return</div>
             </div>
-            {visibile && <ExtraIssuedItemInfo id={id} visibility={setVisibility} returnFun={returnFunction}/>}    
+            {visibile && <ExtraIssuedItemInfo id={id} visibility={setVisibility} returnFun={returnFunction} loading={loading}/>}    
         </>
     )
 }

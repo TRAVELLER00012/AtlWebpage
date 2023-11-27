@@ -50,3 +50,7 @@
 .form .buttons button:nth-child(2){
     background-color: grey;
 }
+.heading div{
+    display: flex;
+    align-items: center;
+}

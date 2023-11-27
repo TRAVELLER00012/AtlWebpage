@@ -10,6 +10,7 @@ import EditIcon from "@/public/images/edit.png"
 import InsertIcon from "@/public/images/insert.png"
 import RemoveIcon from "@/public/images/remove.png"
 import CloseIcon from "@/public/images/close.png"
+import LoadingCircle from "./LoadingCircle";
 
 
 interface Props{
@@ -29,6 +30,9 @@ const AdminComponent = ({data}:Props) => {
     const itemNameEditField = useRef<HTMLInputElement>(null);
     const itemQuantityEditField = useRef<HTMLInputElement>(null);
     const itemIssuableEditField = useRef<HTMLSelectElement>(null);
+
+    const [loading,setLoading] = useState(false)
+
     return (
         <>
             <div className={styles.options}>
@@ -40,15 +44,21 @@ const AdminComponent = ({data}:Props) => {
                 showRemove && 
                 <div className={[styles.hiddenBox,styles.removeBox].join(" ")}>
                     <div className={styles.heading}>
-                        <h1>Remove Item</h1>
+                        <div>
+                            <h1>Remove Item</h1>
+                            {loading &&<LoadingCircle />}
+                        </div>
                         <Image src={CloseIcon} alt="close icon" onClick={() => setShowRemove(false)} />
                     </div>
                     <div className={styles.content}>
                         <form onSubmit={(event) =>{
+                            setLoading(true)
                             event.preventDefault();
                             let itemId = itemsField.current?.value;
                             if (itemId){
-                                itemListService.deleteItem(parseInt(itemId))
+                                itemListService.deleteItem(parseInt(itemId)).finally(() =>{
+                                    setLoading(false)
+                                })
                                 window.location.reload()
                             }
                             
@@ -67,12 +77,16 @@ const AdminComponent = ({data}:Props) => {
                 showAdd &&
                 <div className={[styles.hiddenBox,styles.addBox].join(" ")}>
                     <div className={styles.heading}>
-                        <h1>Add an Item</h1>
+                        <div>
+                            <h1>Add an Item</h1>
+                            {loading && <LoadingCircle />}
+                        </div>
                         <Image src={CloseIcon} alt="close icon" onClick={() => setShowAdd(false)} />
                     </div>
                     <div className={styles.content}>
                         <form onSubmit={(event) =>{
                             event.preventDefault()
+                            setLoading(true)
                             if (itemNameField.current && itemQuantityField.current && itemIssuableField.current){
                                 let newItem  : Item = {
                                     id: 0,
@@ -80,7 +94,7 @@ const AdminComponent = ({data}:Props) => {
                                     name: itemNameField.current.value,
                                     quantity : parseInt(itemQuantityField.current.value)
                                 }
-                                itemListService.addItem(newItem);
+                                itemListService.addItem(newItem).then(() => setLoading(false))
                                 window.location.reload()
                             }
                         }}>
@@ -108,12 +122,16 @@ const AdminComponent = ({data}:Props) => {
                 showEdit && 
                 <div className={[styles.hiddenBox,styles.editBox].join(" ")}>
                     <div className={styles.heading}>
-                        <h1>Edit an Item</h1>
+                        <div>
+                            <h1>Edit an Item</h1>
+                            {loading && <LoadingCircle />}
+                        </div>
                         <Image src={CloseIcon} alt="close icon" onClick={() => setShowEdit(false)} />
                     </div>
                     <div className={styles.content}>
                         <form onSubmit={(event) =>{
                             event.preventDefault();
+                            setLoading(true)
                             if(itemNameEditField.current && itemQuantityEditField.current && itemIssuableEditField.current && itemsEditField.current){
                                 const newItem : Item = {
                                     id: parseInt(itemsEditField.current.value),
@@ -121,7 +139,7 @@ const AdminComponent = ({data}:Props) => {
                                     name: itemNameEditField.current.value,
                                     issuable: itemIssuableEditField.current.value === "Yes" ? true : false
                                 }
-                                itemListService.updateItem(newItem.id,newItem);
+                                itemListService.updateItem(newItem.id,newItem).then(() => setLoading(false));
                                 window.location.reload()
                                 
                             }

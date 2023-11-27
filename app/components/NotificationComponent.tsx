@@ -1,3 +1,4 @@
+
 import { useState } from "react"
 import { CanceledError } from "../services/api-client"
 import pendingService, { Pending } from "../services/pendingService"
@@ -6,6 +7,7 @@ import { NotificationData } from "./NavBar"
 import issuedItemService, { Item } from "../services/issuedItemService"
 import itemListService from "../services/itemListService"
 import notificationService from "../services/notificationService"
+import LoadingCircle from "./LoadingCircle"
 
 interface Props{
     data : NotificationData[],
@@ -16,8 +18,9 @@ interface Props{
 const NotificationComponent = ({data,setVisbility} : Props) => {
     const [itemState,setItemState] = useState(false);
     const [returnState, setReturnState] = useState(false)
+    const [loading,setLoading] = useState(false)
     const choice = (state : Pending["state"], id : number) => {
-
+        setLoading(true)
         const getPending = pendingService.getItem(id)
         getPending.then(res=>{
             let newData : Pending = {
@@ -40,9 +43,12 @@ const NotificationComponent = ({data,setVisbility} : Props) => {
             
         }).catch(err =>{
             if (err == CanceledError) return;
+        }).finally(() =>{
+            setLoading(false)
         })
     }
     const accept = (id:number) =>{
+        setLoading(true)
         const currentDate = new Date();
         const months = [
             "January",
@@ -81,7 +87,9 @@ const NotificationComponent = ({data,setVisbility} : Props) => {
                 })
                 choice("Accepted",id)
             }).catch(err =>{if (err == CanceledError) return;})
-        }).catch(err =>{if (err == CanceledError) return;})
+        }).catch(err =>{if (err == CanceledError) return;}).finally(() =>{
+            setLoading(false)
+        })
         
     }
 
@@ -90,6 +98,7 @@ const NotificationComponent = ({data,setVisbility} : Props) => {
     }
     const returnItem = (id : number, index : number | undefined) =>{
         const issuedItem = issuedItemService.getItem(id)
+        setLoading(true)
         issuedItem.then(issuedRes =>{
             const item = itemListService.getItem(issuedRes.data.itemId)
             item.then(itemRes =>{
@@ -104,7 +113,7 @@ const NotificationComponent = ({data,setVisbility} : Props) => {
                     window.location.reload()
                 }).catch(err =>{if (err == CanceledError) return;})
             }).catch(err =>{if (err == CanceledError) return;})
-        }).catch(err =>{if (err == CanceledError) return;})
+        }).catch(err =>{if (err == CanceledError) return;}).finally(() => setLoading(false))
         
         
         if (index)
@@ -116,6 +125,7 @@ const NotificationComponent = ({data,setVisbility} : Props) => {
         <div className={styles.main}>
             <div className={styles.heading}>
                 <h1 onClick={() => setVisbility(false)}>Notifications</h1>
+                {loading && <LoadingCircle />}
             </div>
             <div className={styles.content} >
                 {data.map((d) =>(

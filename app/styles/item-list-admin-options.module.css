@@ -36,6 +36,10 @@
     justify-content: space-between;
     align-items: center;
 }
+.hiddenBox .heading div{
+    display: flex;
+    align-items: center;
+}
 .hiddenBox .heading img{
     cursor: pointer;
 }
