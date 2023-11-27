@@ -1,6 +1,8 @@
 import { ProjectInterface } from "@/app/services/projectService";
 import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../../auth/authOptions";
 
 interface Props{
     params:{
@@ -17,6 +19,8 @@ export async function GET(request: NextRequest, {params} : Props){
     return NextResponse.json(data)
 }
 export async function DELETE(request: NextRequest, {params} : Props){
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({err : "Unauthroized"},{status:401})
     const data = await prisma.projects.delete({
         where:{
             id: parseInt(params.id)
@@ -26,6 +30,8 @@ export async function DELETE(request: NextRequest, {params} : Props){
 }
 
 export async function PATCH(requst: NextRequest, {params} : Props){
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({err : "Unauthroized"},{status:401})
     const body : ProjectInterface = await requst.json()
     const data = await prisma.projects.update({
         where : {

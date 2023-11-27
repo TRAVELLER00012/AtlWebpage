@@ -1,4 +1,3 @@
-import { Domain } from "domain";
 import apiClient from "./api-client";
 
 const DOMAIN = "/attendence/"

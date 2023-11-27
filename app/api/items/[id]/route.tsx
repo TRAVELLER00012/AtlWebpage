@@ -1,6 +1,8 @@
 import itemListService, { Item } from "@/app/services/itemListService"
 import prisma from "@/prisma/client"
+import { getServerSession } from "next-auth"
 import { NextRequest, NextResponse } from "next/server"
+import { authOptions } from "../../auth/authOptions"
 
 interface Props{
     params:{
@@ -19,6 +21,8 @@ export async function GET(request : NextRequest, {params} : Props){
 }
 
 export async function DELETE(request : NextRequest, {params} : Props){
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({err : "Unauthroized"},{status:401})
     const item = prisma.items.findFirst({where:{id:parseInt(params.id)}})
     await prisma.items.delete({
         where:{
@@ -29,6 +33,8 @@ export async function DELETE(request : NextRequest, {params} : Props){
 }
 
 export async function PUT(request : NextRequest, {params} : Props){
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({err : "Unauthroized"},{status:401})
     let newData : Item = await request.json()
     let item = await prisma.items.update({
         where:{

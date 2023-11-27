@@ -1,11 +1,14 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt"
-import { redirect } from "next/dist/server/api-utils";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/authOptions";
 
 
 
 export async function POST(request: NextRequest){
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({err : "Unauthroized"},{status:401})
     const body = await request.json();
     const user = await prisma.user.findFirst({
         where:{
