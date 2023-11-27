@@ -84,7 +84,7 @@ const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
                     <textarea placeholder="Description" maxLength={255} ref={description}/>
                     <input type="date" ref={date}/>
                     <div className={styles.buttons}>
-                        <button type="submit">Submit</button>
+                        <button type="submit" onClick={() => submit()}>Submit</button>
                         <button type="reset" onClick={() => cancel()} >Cancel</button>
                     </div>
                 </form>
