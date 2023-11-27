@@ -13,6 +13,7 @@ import {
 } from 'chart.js';
 import attendenceService from "../services/attendenceService";
 import LoadingCircle from "./LoadingCircle";
+import users from "../services/users";
 
 ChartJS.register(
   CategoryScale,
@@ -56,28 +57,41 @@ function AttendenceGraph() {
   const [absentData,setAbsentData] = useState<number[]>([])
 
   useEffect(() => {
-    if (id) {
-      const request = attendenceService.getAttendenceUser(id)
-      request.then(res =>{
-        let data = res.data;
-        const uniqueMonths = Array.from(new Set(data.map((item) => item.month)));
-          
-        uniqueMonths.forEach((month) => {
-          let presentCount = 0;
-          let absentCount = 0;
-          data.forEach((d) => {
-            if (d.month === month) {
-              if (d.state === 'Present') presentCount++;
-              else absentCount++;
+    if (typeof window !== 'undefined') {
+      const storedEmail = sessionStorage.getItem('userEmail');
+      if (storedEmail){
+        const {request : userRequest , cancel} = users.getAllUser();
+        userRequest.then(res =>{
+          res.data.map(d =>{
+            if (d.email == storedEmail){
+                const request = attendenceService.getAttendenceUser(d.id)
+                request.then(res =>{
+                  let data = res.data;
+                  const uniqueMonths = Array.from(new Set(data.map((item) => item.month)));
+                    
+                  uniqueMonths.forEach((month) => {
+                    let presentCount = 0;
+                    let absentCount = 0;
+                    data.forEach((d) => {
+                      if (d.month === month) {
+                        if (d.state === 'Present') presentCount++;
+                        else absentCount++;
+                      }
+                    });
+                    presentData.push(presentCount);
+                    absentData.push(absentCount);
+                  });
+                  setLabels(uniqueMonths)
+                })
+              return;
             }
-          });
-          presentData.push(presentCount);
-          absentData.push(absentCount);
-        });
-        setLabels(uniqueMonths)
-      })
+          })
+        })
+      }
     }
-  }, [id]);
+
+    
+  }, [email]);
 
 
   const data = {
