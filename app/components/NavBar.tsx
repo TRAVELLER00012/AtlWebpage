@@ -36,8 +36,6 @@ const NavBar = () => {
   const {email,id} = useAuthenticator();
   const currentDate = new Date();
   useEffect(() =>{
-    console.log("CHECK");
-    
     if (typeof window !== 'undefined') {
       const storedEmail = sessionStorage.getItem('userEmail');
       if (storedEmail){
