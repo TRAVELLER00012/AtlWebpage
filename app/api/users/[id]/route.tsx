@@ -10,9 +10,6 @@ interface Props{
 }
 
 export async function GET(request:NextRequest, {params} : Props){
-    const session = await getServerSession(authOptions);
-  
-    if (!session || session.user?.email !== process.env.DB_EMAIL)
     return NextResponse.json(await prisma.user.findFirst({
         select:{
             id:true,
@@ -27,12 +24,6 @@ export async function GET(request:NextRequest, {params} : Props){
             user_type:true,
             section:true
         },
-        where:{
-            id: parseInt(params.id)
-        }
-    }))
-
-    return NextResponse.json(await prisma.user.findFirst({
         where:{
             id: parseInt(params.id)
         }
