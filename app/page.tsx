@@ -9,9 +9,7 @@ import AttendenceGraph from "./components/AttendenceGarph";
 import UserList from "./components/UserList";
 import EnsureAuthentication from "./components/EnsureAuthentication";
 import { useState } from "react";
-import LoadingCircle from "./components/LoadingCircle";
 function Home(){
-  const [loading,setLoading] = useState(false)
   return (
     <>
       <EnsureAuthentication />
@@ -26,10 +24,9 @@ function Home(){
       <div className={styles.currentPeople}>
         <h1 className={styles.mainHeading}>
           Current People Enrolled in ATL
-          {loading && <LoadingCircle />}
         </h1>
         <div className={styles.users} >
-          <UserList setLoading={setLoading}/>
+          <UserList />
         </div>
       </div>
 
