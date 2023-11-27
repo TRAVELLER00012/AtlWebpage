@@ -34,12 +34,11 @@ const NavBar = () => {
   }
   const {status,data} = useSession();
   const {email,id} = useAuthenticator();
-  const storedEmail = sessionStorage.getItem('userEmail');
   const currentDate = new Date();
   useEffect(() =>{
-    console.log("test");
-    
-      const storedEmail = window.sessionStorage.getItem('userEmail');
+
+    if (typeof window !== 'undefined') {
+      const storedEmail = sessionStorage.getItem('userEmail');
       if (storedEmail){
         const {request : userRequest , cancel} = users.getAllUser();
         userRequest.then(res =>{
@@ -52,6 +51,7 @@ const NavBar = () => {
           })
         })
       }
+    }
 
   if(id){
       const request = users.getUser(id)
@@ -145,7 +145,7 @@ const NavBar = () => {
     }
     
     
-  },[id,storedEmail])
+  },[id])
   return (
     <>
       <div className={styles.navbar}>
