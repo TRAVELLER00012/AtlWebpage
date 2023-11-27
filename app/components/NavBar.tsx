@@ -39,7 +39,7 @@ const NavBar = () => {
   useEffect(() =>{
     console.log("test");
     
-      const storedEmail = sessionStorage.getItem('userEmail');
+      const storedEmail = window.sessionStorage.getItem('userEmail');
       if (storedEmail){
         const {request : userRequest , cancel} = users.getAllUser();
         userRequest.then(res =>{
