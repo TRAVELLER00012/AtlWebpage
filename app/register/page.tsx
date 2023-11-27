@@ -36,7 +36,7 @@ function RegisterationForm() {
                     <div className={styles.data}>
                         <form onSubmit={async (event) => {
                             event.preventDefault()
-                            await axios.post("https://atl-webpage-mu3u.vercel.app/itemlist", {
+                            await axios.post("https://atl-webpage-mu3u.vercel.app/api/register", {
                                 age: parseInt(age.current!.value),
                                 firstName: firstName.current!.value,
                                 lastName: lastName.current!.value,
