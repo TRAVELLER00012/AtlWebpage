@@ -38,7 +38,7 @@ function Home(){
           <div className={styles.itemList}>
               <Card img={ItemList} innerDes={"Check out the items we have!"} heading={<Link href={"./itemlist"}>Item List</Link>} id={1} userInfo={false}/>
               <Card img={IssueItem} innerDes={"Issue an Item from atl lab!"} heading={<Link href={"./issueitems"}>Issue An Item</Link>} id={2} userInfo={false}/>
-              <Card img={ReturnItem} innerDes={"You have nothing to return yet!"} heading={<Link href={"./issueitems"}>Return An Item</Link>} id={3} userInfo={false}/>
+              <Card img={ReturnItem} innerDes={""} heading={<Link href={"./issueitems"}>Return An Item</Link>} id={3} userInfo={false}/>
           </div>
         </div>
       </div>

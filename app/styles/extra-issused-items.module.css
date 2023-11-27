@@ -2,8 +2,10 @@
     position: fixed;
     display: grid;
     grid-template-rows: 15% auto;
+    overflow-y: scroll;
     width: 90%;
     height: 70%;
+    left: 1%;
     background-color: rgb(39,44,58);
     border: 5px solid #00ffa8;
     border-radius: 10px;
@@ -41,4 +43,30 @@
     font-size: 1rem;
     border-radius: 10px;
     grid-column: span 2;
+}
+
+@media screen and (max-width: 768px) {
+    .extraInfo{
+        width:93%;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .extraInfo{
+        width: 90%;
+    }
+    .content div{
+        grid-template-columns: auto;
+        grid-template-rows: 50% 50%;
+        row-gap: 5px;
+    }
+    .remove{
+        width: 100%;
+        height: fit-content;
+    }
+}
+@media screen and (max-width: 376px) {
+    .extraInfo{
+        width: 87%;
+    }
 }

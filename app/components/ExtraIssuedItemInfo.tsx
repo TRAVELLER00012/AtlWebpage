@@ -10,9 +10,10 @@ import CloseIcon from "@/public/images/close.png"
 interface Props{
     id : number,
     visibility : (val : boolean) => void
+    returnFun : () => void
 }
 
-const ExtraIssuedItemInfo = ({id,visibility} : Props) => {
+const ExtraIssuedItemInfo = ({id,visibility,returnFun} : Props) => {
 const [issuedItem,setIssuedItem] = useState<IssuedItem>();
     const [item,setItem] = useState<Item>();
     const [user,setUser] = useState<User>();
@@ -65,7 +66,7 @@ const [issuedItem,setIssuedItem] = useState<IssuedItem>();
                 <span>{user?.class}-{user?.section}</span>
             </div>
             <div className={styles.removeButton}>
-                <button className={styles.remove}>Return</button>
+                <button className={styles.remove} onClick={() => returnFun()}>Return</button>
             </div>
         </div>
     </div>

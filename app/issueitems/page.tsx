@@ -28,16 +28,16 @@ function IssueItems(){
                     Name
                 </div>
                 
-                <div>
+                <div className={styles.quantity}>
                     Quantity
                 </div>
-                <div>
+                <div className={styles.issueDate}>
                     Date Issued 
                 </div>
-                <div>
+                <div className={styles.returnDate}>
                     Return Date
                 </div>
-                <div>
+                <div className={styles.remove}>
                     Return
                 </div>
 

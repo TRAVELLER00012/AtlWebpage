@@ -140,7 +140,7 @@ const NavBar = () => {
               <li><Link href={"./itemlist"}>Item List</Link></li>
               <li><Link href={"./issueitems"}>Issue Items</Link></li>
               <li><Link href={"./paths"}>Paths</Link></li>
-              <li>Profile</li>
+              <li><Link href={"./profile"}>Profile</Link></li>
               {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
         </ul>
         <Image src={NotificationImage} alt="notification img" onClick={() => setShowNotification(!showNotification)} className={styles.notification}/>
@@ -154,7 +154,7 @@ const NavBar = () => {
                 <li><Link href={"./itemlist"}>Item List</Link></li>
                 <li><Link href={"./issueitems"}>Issue Items</Link></li>
                 <li><Link href={"./paths"}>Paths</Link></li>
-                <li>Profile</li>
+                <li><Link href={"./profile"}>Profile</Link></li>
                 {visible && <li onClick={() => setShowNotification(!showNotification)}>Notifications</li>}
                 {status === "authenticated" && <li><Link href={"/api/auth/signout"}>Sign out</Link></li>}
           </ul>

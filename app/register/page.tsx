@@ -1,4 +1,4 @@
-'use client';
+'use client';   
 import Image from "next/image";
 import CloseIcon from "@/public/images/close.png"
 import styles from "../styles/register.module.css";

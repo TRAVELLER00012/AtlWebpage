@@ -48,6 +48,9 @@
 }
 @media screen and (max-width: 426px) {
     .main{
-        width: fit-content;
+        width: 75%;
+    }
+    .msg{
+        width: 25ch;
     }
 }

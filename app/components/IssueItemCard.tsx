@@ -37,49 +37,57 @@ function ItemCard({id,count,name,quantity,issueDate,returnDate,email}:Props){
             })
         })
     },[])
+
+    const returnFunction = () =>{
+        const {request,cancel} = users.getAllUser();
+        request.then(res =>{    
+            res.data.map(d =>{
+                if (d.email == email && d.user_type == "Moderator"){
+                    const issuedItem = issuedItemService.getItem(id)
+                    issuedItem.then(issuedRes =>{
+                        const item = itemListService.getItem(issuedRes.data.itemId)
+                        item.then(itemRes =>{
+                            const updateItem = itemListService.updateItem(itemRes.data.id,{
+                                id: itemRes.data.id,
+                                issuable : itemRes.data.issuable,
+                                name : itemRes.data.name,
+                                quantity : itemRes.data.quantity + issuedRes.data.quantity
+                            })
+                            updateItem.then(r =>{
+                                const deleteIsseudItem = issuedItemService.deleteIssuedItem(id)
+                                deleteIsseudItem.then(r =>{
+                                    window.location.reload()
+                                })
+                            })
+
+                        })
+                    })
+                    return;
+                }else if (d.email == email){
+                    notificationService.addNotification({
+                        access : "Moderators",
+                        description : `${itemInfo?.name} has requested to return item: ${itemInfo?.itemName} (quantity: ${itemInfo?.quantity})`,
+                        id :0,
+                        notificationType : "Return",
+                        issuedItemId: id
+                    })
+                    return;
+                }
+            })
+        })
+    }
+
     return (
         <>
             <div className={[styles.itemSelection,styles.items].join(" ")}>
                 <div>{count}</div>
                 <div onClick={() => setVisibility(!visibile)} className={styles.name}>{name}</div>
-                <div>{quantity}</div>
-                <div>{issueDate}</div>
-                <div>{returnDate}</div>
-                <div className={styles.remove} onClick={() =>{
-                    const {request,cancel} = users.getAllUser();
-                    request.then(res =>{    
-                        res.data.map(d =>{
-                            if (d.email == email && d.user_type == "Moderator"){
-                                const issuedItem = issuedItemService.getItem(id)
-                                issuedItem.then(issuedRes =>{
-                                    const item = itemListService.getItem(issuedRes.data.itemId)
-                                    item.then(itemRes =>{
-                                        const updateItem = itemListService.updateItem(itemRes.data.id,{
-                                            id: itemRes.data.id,
-                                            issuable : itemRes.data.issuable,
-                                            name : itemRes.data.name,
-                                            quantity : itemRes.data.quantity + issuedRes.data.quantity
-                                        })
-                                        const deleteIsseudItem = issuedItemService.deleteIssuedItem(id)
-
-                                    })
-                                })
-                                return;
-                            }else if (d.email == email){
-                                notificationService.addNotification({
-                                    access : "Moderators",
-                                    description : `${itemInfo?.name} has requested to return item: ${itemInfo?.itemName} (quantity: ${itemInfo?.quantity})`,
-                                    id :0,
-                                    notificationType : "Return",
-                                    issuedItemId: id
-                                })
-                                return;
-                            }
-                        })
-                    })
-                }}>Return</div>
+                <div className={styles.quantity}>{quantity}</div>
+                <div className={styles.issueDate}>{issueDate}</div>
+                <div className={styles.returnDate}>{returnDate}</div>
+                <div className={styles.remove} onClick={() => returnFunction()}>Return</div>
             </div>
-            {visibile && <ExtraIssuedItemInfo id={id} visibility={setVisibility}/>}    
+            {visibile && <ExtraIssuedItemInfo id={id} visibility={setVisibility} returnFun={returnFunction}/>}    
         </>
     )
 }

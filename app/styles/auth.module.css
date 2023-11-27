@@ -29,3 +29,14 @@
 .button:hover span{
     opacity: 1;
 }
+
+@media screen and (max-width: 768px) {
+    .mainPage{
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+        row-gap: 10px;
+    }
+    .button{
+        width: 100%;
+    }
+}

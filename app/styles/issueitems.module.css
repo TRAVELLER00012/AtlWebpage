@@ -22,8 +22,11 @@
         font-size: 0.75rem;
     }
     .itemSelection{
-        grid-template-columns: repeat(3,33%);
-        grid-template-rows: repeat(2,50%);
-        row-gap: 10px;
+        display: grid;
+        grid-template-columns: 50% auto;
+
+    }
+    .remove,.issueDate,.returnDate,.quantity{
+        display: none;
     }
 }

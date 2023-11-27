@@ -1,6 +1,7 @@
 .registerPage{
     margin-top: 20px;
-    height: 85%;
+
+    height: fit-content;
     padding: 10px 20px;
     background: rgb(15,15,15);
     background: linear-gradient(90deg, rgba(15,15,15,1) 32%, rgba(75,75,75,1) 62%, rgba(124,124,124,1) 75%);
@@ -123,4 +124,44 @@
 }
 .status{
     color: red;
+}
+@media screen and (max-width: 1024px) {
+    .item{
+        font-size: 1rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    .content{
+        display: grid;
+        grid-template-columns: auto;
+    }
+    .nav{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .data .layer1{
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto auto auto auto;
+    }
+        
+    .data .layer2{
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto auto
+    }
+    .closeButton{
+        display: none;
+    }
+    .data .layer3{
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+        row-gap: 10px;
+    }
+    .registerPage{
+        width: fit-content;
+        position: absolute;
+        left: 0%;
+
+    }
 }

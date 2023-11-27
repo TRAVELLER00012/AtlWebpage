@@ -1,8 +1,8 @@
 import Alert from "../components/Alert"
-const PathPage = () => {
+const ProfilePage = () => {
   return (
     <Alert>Work in progress</Alert>
   )
 }
 
-export default PathPage
+export default ProfilePage
