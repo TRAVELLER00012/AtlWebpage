@@ -54,11 +54,9 @@ function AttendenceGraph() {
   const { email , id} = useAuthenticator();
   const [presentData,setPresentData] = useState<number[]>([])
   const [absentData,setAbsentData] = useState<number[]>([])
-  const [loading,setLoading] = useState(false);
 
   useEffect(() => {
     if (id) {
-      setLoading(true)
       const request = attendenceService.getAttendenceUser(id)
       request.then(res =>{
         let data = res.data;
@@ -77,8 +75,6 @@ function AttendenceGraph() {
           absentData.push(absentCount);
         });
         setLabels(uniqueMonths)
-      }).finally(() =>{
-        setLoading(false)
       })
     }
   }, [id]);
@@ -109,7 +105,6 @@ function AttendenceGraph() {
   return(
     <>
       <div>
-        <LoadingCircle />
         <Line options={options} data={data} />
       </div>
     </>

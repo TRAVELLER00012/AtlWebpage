@@ -29,7 +29,6 @@ const NavBar = () => {
   const [allowMod, setAllowMod] =  useState(false)
   const [showNotification,setShowNotification] = useState(false)
   const [notificationData, setNotificationData] = useState<NotificationData[]>([]);
-  const [loading,setLoading] = useState(false)
 
   const onMenuClick = () =>{
     setVisibility(!visible)
@@ -43,12 +42,9 @@ const NavBar = () => {
       const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
 
       request.then(res =>{
-        setLoading(true)
         if (res.data.user_type == "Moderator") setAllowMod(true)
         else setAllowMod(false)
         
-      }).finally(() =>{
-        setLoading(false)
       })
 
 
@@ -56,7 +52,6 @@ const NavBar = () => {
       const {request : pendingRequest,cancel} = pendingService.getAllItems();
       
       pendingRequest.then(res =>{
-        setLoading(true)
         res.data.map(d =>{
           if (d.userId == id){            
             let finalData : NotificationData = {
@@ -108,13 +103,10 @@ const NavBar = () => {
         })
       }).catch(err => {
         if (err == CanceledError) return;
-      }).finally(() =>{
-        setLoading(false)
       })
       const user = users.getUser(id)
       user.then(userRes =>{
         notificationRequest.then(res =>{
-            setLoading(true)
             res.data.map(d =>{
               if (d.access == "Moderators"){
                 let newData : NotificationData = {
@@ -134,10 +126,7 @@ const NavBar = () => {
             setNotificationData(temp)
           }).catch(err => {
             if (err == CanceledError) return;
-          }).finally(() =>{
-            setLoading(true)
           })
-        
           
       })
       return () => {
@@ -153,7 +142,6 @@ const NavBar = () => {
         <div className={styles.heading}>
           <Image src={NavLogo} alt="navbar logo" className={styles.logo}/>
           <h1>ATL</h1>
-          {loading && <LoadingCircle />}
         </div>
         <ul>
               <li><Link href={"."}>Home</Link></li>
