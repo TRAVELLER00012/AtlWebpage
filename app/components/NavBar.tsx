@@ -15,6 +15,7 @@ import itemListService from "../services/itemListService"
 import { CanceledError } from "../services/api-client"
 import notificationService from "../services/notificationService"
 import LoadingCircle from "./LoadingCircle"
+import { tree } from "next/dist/build/templates/app-page"
 export interface NotificationData {
   id : number,
   otherID? : number,
@@ -38,13 +39,24 @@ const NavBar = () => {
   const currentDate = new Date();
   useEffect(() =>{
     console.log(id);
-    
-    if(id){
+    if (typeof window !== 'undefined') {
+      const storedEmail = sessionStorage.getItem('userEmail');
+      if (storedEmail){
+        const {request : userRequest , cancel} = users.getAllUser();
+        userRequest.then(res =>{
+          res.data.map(d =>{
+            if (d.email == storedEmail){
+              if (d.user_type == "Moderator") setAllowMod(true)
+              else setAllowMod(false)
+              return;
+            }
+          })
+        })
+      }
+    }
+
+  if(id){
       const request = users.getUser(id)
-      request.then(res =>{
-        if (res.data.user_type == "Moderator") setAllowMod(true)
-        else setAllowMod(false)
-      }).catch(err =>{if(err == CanceledError) return;})
       const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
 
 
