@@ -4,6 +4,7 @@ import styles from '../styles/card-styles.module.css'
 import {ReactNode, useState } from "react";
 import UserExtraInfoCard from "./UserExtraInfoCard";
 import useAuthenticator from "../hook/useAuthticator";
+import EnsureAuthentication from "./EnsureAuthentication";
 
 interface Props{
     heading:ReactNode,
@@ -16,14 +17,8 @@ interface Props{
 function Card({heading,id,innerDes: rank,img: userImg,userInfo}:Props){
     const {email,id : userId} = useAuthenticator();
     const [showExtraInfo, setShowExtraInfo] = useState(false);
-    const showExtraInformation = (showExtra : boolean, showUser : boolean) => {
-      if (showExtra && userId){
-        if (showUser) return <UserExtraInfoCard id={id} key={id} currentUserId={userId} showExtraInfo={setShowExtraInfo}/>
-      }
-    }
     return(
       <>
-
         <div className={styles.card} onClick={() => {
           setShowExtraInfo(!showExtraInfo)          
         }}>
@@ -33,7 +28,9 @@ function Card({heading,id,innerDes: rank,img: userImg,userInfo}:Props){
             <h5>{rank}</h5>
           </div>
         </div>
-        {showExtraInformation(showExtraInfo,userInfo)}
+        {
+            (showExtraInfo) &&   <UserExtraInfoCard id={id} key={id} currentUserId={userId!} showExtraInfo={setShowExtraInfo}/>    
+        }
 
       </>
     )

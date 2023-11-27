@@ -135,7 +135,7 @@ const NavBar = () => {
     }
     
     
-  },[id])
+  })
   return (
     <>
       <div className={styles.navbar}>
