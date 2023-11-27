@@ -141,6 +141,9 @@
 }
 
 @media screen and (max-width: 426px) {
+    .registerPage{
+        background: none;
+    }
     .data .layer1{
         grid-template-columns: auto;
         grid-template-rows: auto auto auto auto auto auto;
