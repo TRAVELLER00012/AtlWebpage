@@ -11,6 +11,7 @@ import projectService, { ProjectInterface } from "../services/projectService"
 import { CanceledError } from "../services/api-client"
 interface Props{
     id : number,
+    currentUserId : number,
     showExtraInfo : (val : boolean) => void;
 }
 

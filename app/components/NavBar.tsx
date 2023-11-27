@@ -25,7 +25,7 @@ export interface NotificationData {
 }
 const NavBar = () => {
   const [visible, setVisibility] = useState(false);
-
+  const [allowMod, setAllowMod] =  useState(false)
   const [showNotification,setShowNotification] = useState(false)
   const [notificationData, setNotificationData] = useState<NotificationData[]>([]);
 
@@ -34,29 +34,16 @@ const NavBar = () => {
   }
   const {status,data} = useSession();
   const {email,id} = useAuthenticator();
-  const [allowMod,setAllowMod] = useState(false)
+  const currentDate = new Date();
   useEffect(() =>{
     if(id){
-      const {request : allUSerRequest,cancel : userCancel} = users.getAllUser()
-      if (typeof window !== 'undefined') {
-        const storedEmail = sessionStorage.getItem('userEmail');
-        if (storedEmail) {
-          allUSerRequest.then(res =>{
-            res.data.map(d =>{
-              if (d.email == storedEmail){
-                const userRequest = users.getUser(d.id)
-                userRequest.then(res =>{
-                  if (res.data.user_type == "Moderator") setAllowMod(true)
-                  else setAllowMod(false)
-                }).catch(err => {if (err == CanceledError)return; }).finally(() =>{return;})
-              }
-            })
-          }).catch(err =>{if (err == CanceledError) return;})
-        }
-      }
-
       const request = users.getUser(id)
       const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
+
+      request.then(res =>{
+        if (res.data.user_type == "Moderator") setAllowMod(true)
+        else setAllowMod(false)
+      })
       let temp : NotificationData[] = []
       const {request : pendingRequest,cancel} = pendingService.getAllItems();
       pendingRequest.then(res =>{
@@ -130,10 +117,11 @@ const NavBar = () => {
             })
             setNotificationData(temp)
           }).catch(err => {if (err == CanceledError) return;})
+        
+          
       })
       return () => {
         cancel()
-        userCancel();
       }
     }
     

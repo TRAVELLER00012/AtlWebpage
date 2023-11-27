@@ -3,6 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import styles from '../styles/card-styles.module.css'
 import {ReactNode, useState } from "react";
 import UserExtraInfoCard from "./UserExtraInfoCard";
+import useAuthenticator from "../hook/useAuthticator";
 
 interface Props{
     heading:ReactNode,
@@ -13,10 +14,11 @@ interface Props{
 }
 
 function Card({heading,id,innerDes: rank,img: userImg,userInfo}:Props){
+    const {email,id : userId} = useAuthenticator();
     const [showExtraInfo, setShowExtraInfo] = useState(false);
     const showExtraInformation = (showExtra : boolean, showUser : boolean) => {
-      if (showExtra){
-        if (showUser) return <UserExtraInfoCard id={id} key={id} showExtraInfo={setShowExtraInfo}/>
+      if (showExtra && userId){
+        if (showUser) return <UserExtraInfoCard id={id} key={id} currentUserId={userId} showExtraInfo={setShowExtraInfo}/>
       }
     }
     return(
