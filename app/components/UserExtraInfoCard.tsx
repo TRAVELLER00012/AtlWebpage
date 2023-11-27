@@ -15,7 +15,7 @@ interface Props{
     showExtraInfo : (val : boolean) => void;
 }
 
-const UserExtraInfoCard = ({id , showExtraInfo} : Props) => {
+const UserExtraInfoCard = ({id , showExtraInfo,currentUserId} : Props) => {
     const [user,setUser] = useState<User>();
     const [projects,setProjects] = useState<ProjectInterface[]>([])
     
@@ -92,11 +92,13 @@ const UserExtraInfoCard = ({id , showExtraInfo} : Props) => {
                 <div className={styles.projects}>
                     <div className={styles.heading}>
                         <h1>Projects</h1>
-                        <div className={[styles.buttonGroup,styles.editInfoButtons].join(" ")}>
-                            <Image src={EditIcon} alt="edit icon" onClick={() =>{setShowEdit(!showEdit)}}/>
-                            <Image src={AddIcon} alt="add icon" onClick={() =>{setShowAdd(!showAdd)}}/>
-                            <Image src={RemoveIcon} alt="remove icon" onClick={() =>{setShowDelete(!showDelete)}}/>
-                        </div>
+                        {id == currentUserId && (
+                            <div className={[styles.buttonGroup,styles.editInfoButtons].join(" ")}>
+                                <Image src={EditIcon} alt="edit icon" onClick={() =>{setShowEdit(!showEdit)}}/>
+                                <Image src={AddIcon} alt="add icon" onClick={() =>{setShowAdd(!showAdd)}}/>
+                                <Image src={RemoveIcon} alt="remove icon" onClick={() =>{setShowDelete(!showDelete)}}/>
+                            </div>
+                        )}
                     </div>
                 
                     <div className={showAdd ? styles.showAdd : styles.hidden}>
