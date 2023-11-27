@@ -14,8 +14,6 @@ import pendingService from "../services/pendingService"
 import itemListService from "../services/itemListService"
 import { CanceledError } from "../services/api-client"
 import notificationService from "../services/notificationService"
-import LoadingCircle from "./LoadingCircle"
-import { tree } from "next/dist/build/templates/app-page"
 export interface NotificationData {
   id : number,
   otherID? : number,
@@ -38,8 +36,8 @@ const NavBar = () => {
   const {email,id} = useAuthenticator();
   const currentDate = new Date();
   useEffect(() =>{
-    console.log(id);
-    if (typeof window !== 'undefined') {
+    console.log(email);
+    // if (typeof window !== 'undefined') {
       const storedEmail = sessionStorage.getItem('userEmail');
       if (storedEmail){
         const {request : userRequest , cancel} = users.getAllUser();
@@ -53,7 +51,7 @@ const NavBar = () => {
           })
         })
       }
-    }
+    // }
 
   if(id){
       const request = users.getUser(id)
