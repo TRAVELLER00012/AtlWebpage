@@ -2,10 +2,9 @@ import { NextResponse,NextRequest } from "next/server";
 import prisma from "@/prisma/client";
 import { AttendenceProps } from "@/app/services/attendenceService";
 
-
 export async function GET(request : NextRequest){
-    const respone = await prisma.attendence.findMany();
-    return NextResponse.json(respone)
+    const response = await prisma.attendence.findMany();
+    return NextResponse.json(response)
 }
 
 export async function POST(request:NextRequest) {
