@@ -126,7 +126,7 @@ const NotificationComponent = ({data,setVisbility} : Props) => {
                             </div>
                         )}
                         <div className={styles.userMsg}>
-                            {d.state == "Pending" && <p>You sent a request to issue a/an <span className={styles.red}>{d.itemName}</span> , quantity: <span className={styles.red}>{d.quantity}</span>; please wait for one of the administrators to accept; you'll see the decision by them here.</p>}
+                            {d.state == "Pending" && <p>You sent a request to issue a/an <span className={styles.red}>{d.itemName}</span> , quantity: <span className={styles.red}>{d.quantity}</span>; please wait for one of the administrators to accept; you&sbquo;ll see the decision by them here.</p>}
                             {d.state == "Accepted" && <p>One of our administrators has accepted your request for issue item: <span className={styles.red}>{d.itemName}</span>, quantity: <span className={styles.red}>{d.quantity}</span>. Please make sure to return it as soon as possible.</p>}
                             {d.state == "Rejected" && <p>One of our administrators has rejected  your request for issue item: <span className={styles.red}>{d.itemName}</span>, quantity: <span className={styles.red}>{d.quantity}</span>.</p>}
                             {d.state == "ModReview" && <p>One of our student has requested to issue an item..<br/><br/>Item Name: <span className={styles.red}>{d.itemName}</span>, quantity: <span className={styles.red}>{d.quantity}</span><br/><br/>

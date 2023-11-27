@@ -3,7 +3,6 @@ import pendingService from "../services/pendingService"
 import styles from "../styles/pending-card.module.css"
 import users from "../services/users"
 import issuedItemService from "../services/issuedItemService"
-import { months } from "../attendenceAuth/page"
 import itemListService from "../services/itemListService"
 interface Props{
     max : number,
@@ -12,7 +11,10 @@ interface Props{
     cancel : () => void,
     submit : () => void
 }
-
+let months : string[] = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
 const PendingCard = ({max,cancel,itemId,submit,userId} : Props) => {
     const quantity = useRef<HTMLInputElement>(null);
     const description = useRef<HTMLTextAreaElement>(null);
