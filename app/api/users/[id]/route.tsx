@@ -10,22 +10,9 @@ interface Props{
 }
 
 export async function GET(request:NextRequest, {params} : Props){
-    return NextResponse.json(await prisma.user.findFirst({
-        select:{
-            id:true,
-            firstName:true,
-            lastName:true,
-            age:true,
-            bus_number:true,
-            class:true,
-            email:true,
-            number_of_years_in_atl:true,
-            phonenumber:true,
-            user_type:true,
-            section:true
-        },
+    const result = prisma.user.findMany({
         where:{
-            id: parseInt(params.id)
+            id:parseInt(params.id)
         }
-    }))
+    })
 }
