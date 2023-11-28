@@ -4,7 +4,6 @@ import styles from '../styles/card-styles.module.css'
 import {ReactNode, useState } from "react";
 import UserExtraInfoCard from "./UserExtraInfoCard";
 import useAuthenticator from "../hook/useAuthticator";
-import EnsureAuthentication from "./EnsureAuthentication";
 
 interface Props{
     heading:ReactNode,
