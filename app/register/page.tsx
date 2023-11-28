@@ -53,7 +53,7 @@ function RegisterationForm() {
                             })
                             userAddRequest.then(res =>{
                                 setError("")
-                                // router.push("/api/auth/signin")
+                                router.push("/api/auth/signin")
                             }).catch(err =>{
                                     if (err == CanceledError) return;
                                     setError(err.message)
