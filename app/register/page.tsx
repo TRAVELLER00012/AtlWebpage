@@ -3,13 +3,13 @@ import Image from "next/image";
 import CloseIcon from "@/public/images/close.png"
 import styles from "../styles/register.module.css";
 import { useRef, useState } from "react";
-import axios from "axios";
 import CanceledError from "../services/api-client"
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import users from "../services/users";
 
 function RegisterationForm() {
+    const router = useRouter()
     const [error,setError] = useState("")
     const firstName = useRef<HTMLInputElement>(null);
     const lastName = useRef<HTMLInputElement>(null);
@@ -34,9 +34,9 @@ function RegisterationForm() {
                 {error && <div className={styles.status}>{error}</div>}
                 </div>
                     <div className={styles.data}>
-                        <form onSubmit={async (event) => {
+                        <form onSubmit={(event) => {
                             event.preventDefault()
-                                users.addUser({
+                                const userAddRequest = users.addUser({
                                     id : 0,
                                     age: parseInt(age.current!.value),
                                     firstName: firstName.current!.value,
@@ -50,10 +50,11 @@ function RegisterationForm() {
                                     password: password.current!.value,
                                     user_type:"Student",
                                     
-                                }).then(res =>{
+                                })
+                            userAddRequest.then(res =>{
                                 setError("")
-                              })
-                              .catch(err =>{
+                                router.push("/api/auth/signin")
+                            }).catch(err =>{
                                     if (err == CanceledError) return;
                                     setError(err.message)
                               })

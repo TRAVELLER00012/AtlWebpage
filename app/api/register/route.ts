@@ -1,10 +1,12 @@
+// 'use client'
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt"
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+
 
 export async function POST(request: NextRequest){
-    const router = useRouter();
+    // const router = useRouter();
     const body = await request.json();
     const user = await prisma.user.findFirst({
         where:{
@@ -30,7 +32,7 @@ export async function POST(request: NextRequest){
             user_type: body.user_type
         }
     })
-    router.push("/api/auth/signin")
+    // router.push("/api/auth/signin")
 
     return NextResponse.json({email: newUser.email})
 }
