@@ -34,7 +34,7 @@ class Users{
         return apiClient.patch(DOMAIN+item.id,item)
     }
     addUser(item:User){
-        return apiClient.post("/register/",item)
+        return apiClient.post(DOMAIN,item)
     }
 }
 

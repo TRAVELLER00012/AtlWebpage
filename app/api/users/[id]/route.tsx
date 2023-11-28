@@ -15,4 +15,5 @@ export async function GET(request:NextRequest, {params} : Props){
             id:parseInt(params.id)
         }
     })
+    return NextResponse.json(result)
 }
