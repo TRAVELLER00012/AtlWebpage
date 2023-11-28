@@ -8,12 +8,13 @@ export interface User{
     lastName : string
     age : number
     number_of_years_in_atl : number
-    phonenumber : number
+    phonenumber : string
     bus_number : string
     email : string
     class : number
     section : string
     user_type : "Student" | "Teacher" | "Moderator"
+    password? : string
 }
 
 class Users{
@@ -31,6 +32,9 @@ class Users{
     }
     updateUser(item:User){
         return apiClient.patch(DOMAIN+item.id,item)
+    }
+    addUser(item:User){
+        return apiClient.post("/register/",item)
     }
 }
 
