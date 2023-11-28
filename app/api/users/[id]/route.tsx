@@ -10,7 +10,7 @@ interface Props{
 }
 
 export async function GET(request:NextRequest, {params} : Props){
-    const result = await prisma.user.findMany({
+    const result = await prisma.user.findFirst({
         where:{
             id:parseInt(params.id)
         }
