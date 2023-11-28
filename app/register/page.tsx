@@ -36,24 +36,24 @@ function RegisterationForm() {
                     <div className={styles.data}>
                         <form onSubmit={(event) => {
                             event.preventDefault()
-                                const userAddRequest = users.addUser({
-                                    id : 0,
-                                    age: parseInt(age.current!.value),
-                                    firstName: firstName.current!.value,
-                                    lastName: lastName.current!.value,
-                                    phonenumber: phoneNumber.current!.value,
-                                    number_of_years_in_atl: parseInt(years_in_atl.current!.value),
-                                    bus_number: bus_number.current!.value,
-                                    class: parseInt(userClass.current!.value),
-                                    section: section.current!.value,
-                                    email: email.current!.value,
-                                    password: password.current!.value,
-                                    user_type:"Student",
-                                    
-                                })
+                            const userAddRequest = users.addUser({
+                                id : 0,
+                                age: parseInt(age.current!.value),
+                                firstName: firstName.current!.value,
+                                lastName: lastName.current!.value,
+                                phonenumber: phoneNumber.current!.value,
+                                number_of_years_in_atl: parseInt(years_in_atl.current!.value),
+                                bus_number: bus_number.current!.value,
+                                class: parseInt(userClass.current!.value),
+                                section: section.current!.value,
+                                email: email.current!.value,
+                                password: password.current!.value,
+                                user_type:"Student",
+                                
+                            })
                             userAddRequest.then(res =>{
                                 setError("")
-                                router.push("/api/auth/signin")
+                                // router.push("/api/auth/signin")
                             }).catch(err =>{
                                     if (err == CanceledError) return;
                                     setError(err.message)
