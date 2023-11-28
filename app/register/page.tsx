@@ -11,7 +11,6 @@ import users from "../services/users";
 
 function RegisterationForm() {
     const [error,setError] = useState("")
-    const [succesful, setSuccesful] = useState(false)
     const firstName = useRef<HTMLInputElement>(null);
     const lastName = useRef<HTMLInputElement>(null);
     const phoneNumber = useRef<HTMLInputElement>(null);
@@ -22,7 +21,7 @@ function RegisterationForm() {
     const section = useRef<HTMLInputElement>(null);
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
-    if (succesful) redirect("/api/auth/signin")
+
     return (
         <div className={styles.registerPage}>
             <div className={styles.heading}>
@@ -53,7 +52,6 @@ function RegisterationForm() {
                                     
                                 }).then(res =>{
                                 setError("")
-                                setSuccesful(true)
                               })
                               .catch(err =>{
                                     if (err == CanceledError) return;
