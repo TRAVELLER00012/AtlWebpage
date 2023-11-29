@@ -33,117 +33,111 @@ const NavBar = () => {
     setVisibility(!visible)
   }
   const {status,data} = useSession();
-  const {email} = useAuthenticator();
-  const [id,setId] = useState<number>()
+  const {email,id} = useAuthenticator();
   const currentDate = new Date();
   useEffect(() =>{
-    const {request : userRequest , cancel} = users.getAllUser();
     if (typeof window !== 'undefined') {
       const storedEmail = sessionStorage.getItem('userEmail');
-
       if (storedEmail){
+        const {request : userRequest , cancel} = users.getAllUser();
         userRequest.then(res =>{
           res.data.map(d =>{
             if (d.email == storedEmail){
-              setId(d.id)
               if (d.user_type == "Moderator") setAllowMod(true)
               else setAllowMod(false)
-                  const request = users.getUser(d.id)
-                  const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
-                let temp : NotificationData[] = []
-                const {request : pendingRequest,cancel} = pendingService.getAllItems();
-                
-                pendingRequest.then(res =>{
-                  res.data.map(d =>{
-                    if (d.userId == d.id){            
-                      let finalData : NotificationData = {
-                        id : 0,
-                        itemName : "",
-                        quantity : 0,
-                        state : "Pending",
-                        userName : ""
-                      }
-                      const item = itemListService.getItem(d.itemId)
-                      request.then(u => {
-                        finalData.userName = u.data.firstName + " " + u.data.lastName
-                        finalData.id = d.id;
-                        finalData.quantity = d.quantity;
-                        finalData.state = d.state;
-                        item.then(i => {
-                          finalData.itemName = i.data.name
-                          temp.push(finalData)
-                        }).catch(err => {if (err == CanceledError) return;})
-                      })
-                      .catch(err => {if(err == CanceledError) return;})  
-          
-          
-                    }else{
-                      request.then(res =>{
-                        if (res.data.user_type == "Moderator" && d.state == "Pending"){
-                          const item = itemListService.getItem(d.itemId)
-                          item.then(i =>{
-                            let finalData : NotificationData = {
-                              id : 0,
-                              itemName : "",
-                              quantity : 0,
-                              state : "ModReview",
-                              userName : ""
-                            }
-                            finalData.itemName = i.data.name
-                            finalData.quantity = d.quantity
-                            
-                            let userReq = users.getUser(d.userId)
-                            userReq.then(userRes =>{
-                              finalData.userName = userRes.data.firstName + " " + userRes.data.lastName
-                              finalData.id = d.id
-                              temp.push(finalData)
-                            })
-                            }).catch(err => {if (err == CanceledError) return;})
-                        }
-                      })
+              const request = users.getUser(d.id)
+              const {request: notificationRequest, cancel : notificationCancel} = notificationService.getAllNotifications();
+        
+        
+              let temp : NotificationData[] = []
+              const {request : pendingRequest,cancel} = pendingService.getAllItems();
+              
+              pendingRequest.then(res =>{
+                res.data.map(d =>{
+                  if (d.userId == id){            
+                    let finalData : NotificationData = {
+                      id : 0,
+                      itemName : "",
+                      quantity : 0,
+                      state : "Pending",
+                      userName : ""
                     }
-                  })
-                }).catch(err => {
-                  if (err == CanceledError) return;
-                })
-                const user = users.getUser(d.id)
-                user.then(userRes =>{
-                  notificationRequest.then(res =>{
-                      res.data.map(d =>{
-                        if (d.access == "Moderators"){
-                          let newData : NotificationData = {
-                            id : d.issuedItemId,
-                            state : d.notificationType,
-                            description : d.description,
-                            otherID: d.id
-                          }
-                          if (userRes.data.user_type == "Moderator"){
-                            temp.push(newData)
-                            setNotificationData(temp)
-                          }else{
-                            setNotificationData(temp)
-                          }
-                        }
-                      })
-                      setNotificationData(temp)
-                    }).catch(err => {
-                      if (err == CanceledError) return;
+                    const item = itemListService.getItem(d.itemId)
+                    request.then(u => {
+                      finalData.userName = u.data.firstName + " " + u.data.lastName
+                      finalData.id = d.id;
+                      finalData.quantity = d.quantity;
+                      finalData.state = d.state;
+                      item.then(i => {
+                        finalData.itemName = i.data.name
+                        temp.push(finalData)
+                      }).catch(err => {if (err == CanceledError) return;})
                     })
-                    
+                    .catch(err => {if(err == CanceledError) return;})  
+        
+        
+                  }else{
+                    request.then(res =>{
+                      if (res.data.user_type == "Moderator" && d.state == "Pending"){
+                        const item = itemListService.getItem(d.itemId)
+                        item.then(i =>{
+                          let finalData : NotificationData = {
+                            id : 0,
+                            itemName : "",
+                            quantity : 0,
+                            state : "ModReview",
+                            userName : "",
+                            description:""
+                          }
+                          finalData.itemName = i.data.name
+                          finalData.quantity = d.quantity
+                          finalData.description = d.description
+                          let userReq = users.getUser(d.userId)
+                          userReq.then(userRes =>{
+                            finalData.userName = userRes.data.firstName + " " + userRes.data.lastName
+                            finalData.id = d.id
+                            temp.push(finalData)
+                          })
+                          }).catch(err => {if (err == CanceledError) return;})
+                      }
+                    })
+                  }
                 })
+              }).catch(err => {
+                if (err == CanceledError) return;
+              })
+              const user = users.getUser(d.id)
+              user.then(userRes =>{
+                notificationRequest.then(res =>{
+                    res.data.map(d =>{
+                      if (d.access == "Moderators"){
+                        let newData : NotificationData = {
+                          id : d.issuedItemId,
+                          state : d.notificationType,
+                          description : d.description,
+                          otherID: d.id
+                        }
+                        if (userRes.data.user_type == "Moderator"){
+                          temp.push(newData)
+                          setNotificationData(temp)
+                        }else{
+                          setNotificationData(temp)
+                        }
+                      }
+                    })
+                    setNotificationData(temp)
+                  }).catch(err => {
+                    if (err == CanceledError) return;
+                  })
+                  
+              })
               return;
             }
           })
         })
       }
-    }
-
-
-     
-    return () => {
-      cancel()
-    }
-  },[email])
+    }    
+  },[id,email])
   return (
     <>
       <div className={styles.navbar}>
