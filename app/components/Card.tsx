@@ -28,7 +28,7 @@ function Card({heading,id,innerDes: rank,img: userImg,userInfo}:Props){
           </div>
         </div>
         {
-            (showExtraInfo) &&   <UserExtraInfoCard id={id} key={id} currentUserId={userId!} showExtraInfo={setShowExtraInfo}/>    
+            (showExtraInfo && userInfo) &&   <UserExtraInfoCard id={id} key={id} currentUserId={userId!} showExtraInfo={setShowExtraInfo}/>    
         }
 
       </>
